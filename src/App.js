@@ -25,7 +25,7 @@ function App() {
             <Route path="pointage-tache" element={<PointageTache />} />
             <Route path="pointage-validation" element={<PointageValidation />} />
           </Route>
-          <Route path="/planning/*">
+          <Route path="/planning/*" >
             <Route path="planning-realise" element={<PlanningRealise />} />
             <Route path="planning-hebdo" element={<PlanningHebdo />} />
             <Route path="*" element={<PlanningHome />} />
