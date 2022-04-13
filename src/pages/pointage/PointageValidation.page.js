@@ -1,10 +1,10 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
-import SubmitButton from '../components/buttons/SubmitButton'
-import PointageDetail from '../components/PointageDetail'
-import ReturnButton from '../components/buttons/ReturnButton'
-import ButtonFormGroupe from '../components/buttons/ButtonFormGroupe'
-import FormLayout from '../components/forms/FormLayout'
+import SubmitButton from '../../components/buttons/SubmitButton'
+import PointageDetail from '../../components/PointageDetail'
+import ReturnButton from '../../components/buttons/ReturnButton'
+import ButtonFormGroupe from '../../components/buttons/ButtonFormGroupe'
+import FormLayout from '../../components/forms/FormLayout'
 
 const PointageValidation = () => {
   const navigate = useNavigate()
