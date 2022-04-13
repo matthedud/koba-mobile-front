@@ -12,6 +12,7 @@ const InputComp = props => {
       placeholder={props.placeholder}
       id={props.name}
       onChange={props.onChange}
+      {...props}
     />
   )
 }
