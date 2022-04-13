@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react"
-import { FormContext } from "../context/FormContext"
-import SelectInput from "./inputs/SelectInput"
+import { FormContext } from "../../context/FormContext"
+import SelectInput from "../inputs/SelectInput"
 
-const ChantierMoForm = props => {
+const PointageChantierMoForm = () => {
   const { form, onChange } = useContext(FormContext)
   const [salaries, setSalaries] = useState([])
   const [chantiers, setChantiers] = useState([])
@@ -30,4 +30,4 @@ const ChantierMoForm = props => {
   )
 }
 
-export default ChantierMoForm
+export default PointageChantierMoForm

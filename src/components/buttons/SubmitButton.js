@@ -1,9 +1,10 @@
 import React from 'react'
+import ButtonComp from './ButtonComp'
 import './SubmitButton.css'
 
 const SubmitButton = props => {
   return (
-    <button className='submit-button' onClick={props.onClick}>Valider</button>
+    <ButtonComp className='submit-button' onClick={props.onClick}>Valider</ButtonComp>
   )
 }
 
