@@ -1,0 +1,29 @@
+.loading-overlay {
+  position: fixed;
+  background: #00000080;
+  height: 100vh;
+  width: 100vw;
+  transition: all 200ms ease-in;
+  display: none;
+}
+
+.loading-icon {
+  height: 40vmin;
+  pointer-events: none;
+  top: 20vh;
+  position: fixed;
+  color: aqua;
+  z-index: 50;
+  font-size: 5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loading-icon {
+    animation: App-logo-spin infinite 1s linear;
+  }
+}
+
+.loading-overlay.open {
+  display: block;
+  z-index: 500;
+}

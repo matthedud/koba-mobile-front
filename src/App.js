@@ -11,13 +11,13 @@ import ChantierList from "./pages/ChantierList.page"
 import ChantierDetail from "./pages/ChantierDetail.page"
 import PointageChantier from "./pages/PointageChantier.page"
 import PointageTache from "./pages/PointageTache.page"
-import Loading from "./pages/Loading.page"
 import PointageValidation from "./pages/PointageValidation.page"
+import LoadingOverLay from "./components/LoadingOverLay"
 
 function App() {
   return (
     <div className="App">
-      <Loading>
+      <LoadingOverLay/>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/pointage/*">
@@ -40,7 +40,6 @@ function App() {
           </Route>
           <Route path="/*" element={<Home />} />
         </Routes>
-      </Loading>
     </div>
   )
 }

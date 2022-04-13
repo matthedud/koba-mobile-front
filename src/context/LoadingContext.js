@@ -1,11 +1,12 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
  
 const LoadingContext = createContext();
 
 const LoadingProviderWrapper =(props) => {
+  const [loading, setLoading] = useState(false)
 
     return (
-      <LoadingContext.Provider value={"dark"}>
+      <LoadingContext.Provider value={{loading, setLoading}}>
           {props.children}
       </LoadingContext.Provider>
     )

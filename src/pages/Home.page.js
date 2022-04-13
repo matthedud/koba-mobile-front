@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import HomeButton from "../components/HomeButton"
 import './Home.css'
@@ -8,9 +8,13 @@ import { IoIosConstruct } from 'react-icons/io';
 import { BsFillCalendarDateFill } from 'react-icons/bs';
 import { BiTimeFive } from 'react-icons/bi';
 import { FiLogOut } from 'react-icons/fi';
+import { LoadingContext } from "../context/LoadingContext";
 
 const Home = () => {
   const navigate = useNavigate()
+  const {loading, setLoading} = useContext(LoadingContext)
+
+  const toggleLOading = () => setLoading(!loading)
 
   return (
     <>
@@ -19,7 +23,7 @@ const Home = () => {
         <HomeButton onClick={() => navigate("/planning")} ><BsFillCalendarDateFill/>{"Planning"}<div/></HomeButton>
         <HomeButton onClick={() => navigate("/chantiers")} ><IoIosConstruct/>{"Chantiers"}<div/></HomeButton>
         <HomeButton onClick={() => navigate("/photo")} ><MdPhotoCamera/>{"Photos"}<div/></HomeButton>
-        <HomeButton onClick={() => {}} ><FiLogOut/>{"Logout"}<div/></HomeButton>
+        <HomeButton onClick={toggleLOading} ><FiLogOut/>{"Logout"}<div/></HomeButton>
       </div>
     </>
   )
