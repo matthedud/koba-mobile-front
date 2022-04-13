@@ -1,0 +1,5 @@
+.button-form-groupe{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}

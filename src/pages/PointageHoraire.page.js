@@ -1,24 +1,24 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
 import SubmitButton from '../components/buttons/SubmitButton'
-import PointageTacheForm from '../components/forms/PointageTacheForm'
+import PointageHoraireForm from '../components/forms/PointageHoraireForm'
 import FormLayout from '../components/forms/FormLayout'
 import ReturnButton from '../components/buttons/ReturnButton'
 import ButtonFormGroupe from '../components/buttons/ButtonFormGroupe'
 
-const PointageTache = () => {
+const PointageHoraire = () => {
   const navigate = useNavigate()
 
   const handleSubmit= ()=>{
-    navigate('/pointage/pointage-validation')
+    navigate('/pointage/pointage-tache')
   }
 
   const handleReturn= ()=>{
-    navigate('/pointage/pointage-horaire')
+    navigate('/pointage')
   }
   return (
     <FormLayout>
-      <PointageTacheForm />
+      <PointageHoraireForm />
       <ButtonFormGroupe>
         <ReturnButton onClick={handleReturn}/>
         <SubmitButton onClick={handleSubmit}/>
@@ -27,4 +27,4 @@ const PointageTache = () => {
   )
 }
 
-export default PointageTache
+export default PointageHoraire
