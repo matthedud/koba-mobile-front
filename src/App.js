@@ -5,6 +5,7 @@ import ChantierDetail from "./pages/ChantierDetail.page"
 import Home from "./pages/Home.page"
 import LoadingOverLay from "./components/LoadingOverLay"
 import Login from "./pages/Login.page"
+import Signup from "./pages/Signup.page"
 import NotFound from "./pages/NotFound.page"
 import PlanningRealise from "./pages/PlanningRealise.page"
 import PlanningHebdo from "./pages/PlanningHebdo.page"
@@ -15,13 +16,20 @@ import PointageHoraire from "./pages/PointageHoraire.page"
 import PointageChantier from "./pages/PointageChantier.page"
 import PointageTache from "./pages/PointageTache.page"
 import PointageValidation from "./pages/PointageValidation.page"
+import { useContext } from "react"
+import { AuthContext } from "./context/AuthContext"
 
 function App() {
+  const {isLoggedIn} = useContext(AuthContext)
+  console.log({isLoggedIn})
   return (
     <div className="App">
       <LoadingOverLay/>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          {!isLoggedIn ? 
+          <Route path="/*" element={<Login />} /> :
+          <>
+          <Route path="/signup" element={<Signup />} />
           <Route path="/pointage/*">
             <Route path="pointage-horaire" element={<PointageHoraire />} />
             <Route path="pointage-tache" element={<PointageTache />} />
@@ -43,7 +51,9 @@ function App() {
           </Route>
           <Route path="/" element={<Home />} />
           <Route path="/*" element={<NotFound />} />
-        </Routes>
+          </>
+        }
+          </Routes>
     </div>
   )
 }

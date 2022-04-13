@@ -1,13 +1,13 @@
-import { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from "react"
+import { UserOutlined, LockOutlined } from "@ant-design/icons"
+import {Button, Input} from 'antd'
 import axios from 'axios'
-import { AuthContext } from '../context/AuthContext'
+import { Link, useNavigate } from 'react-router-dom'
+import { SyncOutlined } from "@ant-design/icons"
 
 const API_URL = 'http://localhost:5005/api'
 
-function LoginForm(props) {
-  const { storeToken, authenticateUser } = useContext(AuthContext)
-
+function SignupForm(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState(undefined)
@@ -17,7 +17,7 @@ function LoginForm(props) {
   const handleUsername = (e) => setUsername(e.target.value)
   const handlePassword = (e) => setPassword(e.target.value)
 
-  const handleLoginSubmit = (e) => {
+  const handleSignupSubmit = (e) => {
     e.preventDefault()
     // Create an object representing the request body
     const requestBody = { username, password }
@@ -26,27 +26,21 @@ function LoginForm(props) {
     // If POST request is successful redirect to login page
     // If the request resolves with an error, set the error message in the state
     axios
-      .post(`${API_URL}/auth/login`, requestBody)
+      .post(`${API_URL}/auth/signup`, requestBody)
       .then((response) => {
-        console.log('JWT RETURNED', response.data)
-        
-        storeToken(response.data.authToken)
-        authenticateUser()
-
-        //navigate('/')
+        navigate('/login')
       })
       .catch((error) => {
-        console.log(error)
         const errorDescription = error.response.data.message
         setErrorMessage(errorDescription)
       })
   }
 
   return (
-    <div className="LoginPage">
-      <h1>Login</h1>
+    <div className="SignupPage">
+      <h1>Sign Up</h1>
 
-      <form onSubmit={handleLoginSubmit}>
+      <form onSubmit={handleSignupSubmit}>
         <label>Username:</label>
         <input
           type="text"
@@ -63,12 +57,15 @@ function LoginForm(props) {
           onChange={handlePassword}
         />
 
-        <button type="submit">Login</button>
+        <button type="submit">Sign Up</button>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+      <p>Already have account?</p>
+      <Link to={'/login'}> Login</Link>
     </div>
   )
 }
 
-export default LoginForm
+export default SignupForm

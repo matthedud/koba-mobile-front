@@ -9,12 +9,15 @@ import { BsFillCalendarDateFill } from 'react-icons/bs';
 import { BiTimeFive } from 'react-icons/bi';
 import { FiLogOut } from 'react-icons/fi';
 import { LoadingContext } from "../context/LoadingContext";
+import { AuthContext } from '../context/AuthContext'
+
 
 const Home = () => {
   const navigate = useNavigate()
   const {loading, setLoading} = useContext(LoadingContext)
+  const { logOutUser } = useContext(AuthContext)
 
-  const toggleLOading = () => setLoading(!loading)
+  const toggleLoading = () => setLoading(!loading)
 
   return (
     <>
@@ -23,7 +26,11 @@ const Home = () => {
         <HomeButton onClick={() => navigate("/planning")} ><BsFillCalendarDateFill/>{"Planning"}<div/></HomeButton>
         <HomeButton onClick={() => navigate("/chantiers")} ><IoIosConstruct/>{"Chantiers"}<div/></HomeButton>
         <HomeButton onClick={() => navigate("/photo")} ><MdPhotoCamera/>{"Photos"}<div/></HomeButton>
-        <HomeButton onClick={toggleLOading} ><FiLogOut/>{"Logout"}<div/></HomeButton>
+        <HomeButton onClick={() => {
+          setLoading(true)
+          logOutUser()
+          setLoading(false)
+        }} ><FiLogOut/>{"Logout"}<div/></HomeButton>
       </div>
     </>
   )
