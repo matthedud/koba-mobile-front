@@ -1,5 +1,6 @@
 import React from "react"
 import Select from "react-select"
+import './SelectInput.css'
 
 const SelectInput = (props) => {
   return (
@@ -10,7 +11,7 @@ const SelectInput = (props) => {
       options={props.options}
       getOptionLabel={(option) => option.nom}
       getOptionValue={(option) => option._id}
-      className="select-input"
+      className="select"
       isMulti={props.multi}
     />
   )

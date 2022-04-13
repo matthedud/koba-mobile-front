@@ -29,8 +29,11 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+label{
+  font-weight: 700;
+  text-align: left;
+  font-size: 1.5rem;
+  width: 100%;
 }
 
 @keyframes App-logo-spin {

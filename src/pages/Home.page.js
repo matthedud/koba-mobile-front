@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import HomeButton from "../components/HomeButton"
+import HomeButton from "../components/buttons/HomeButton"
 import './Home.css'
 
 import { MdPhotoCamera } from 'react-icons/md';
@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <>
       <div className="home-page">
-        <HomeButton onClick={() => navigate("/pointage-chantier")} ><BiTimeFive/>{ 'Pointage' }<div/></HomeButton>
+        <HomeButton onClick={() => navigate("/pointage")} ><BiTimeFive/>{ 'Pointage' }<div/></HomeButton>
         <HomeButton onClick={() => navigate("/planning")} ><BsFillCalendarDateFill/>{"Planning"}<div/></HomeButton>
         <HomeButton onClick={() => navigate("/chantiers")} ><IoIosConstruct/>{"Chantiers"}<div/></HomeButton>
         <HomeButton onClick={() => navigate("/photo")} ><MdPhotoCamera/>{"Photos"}<div/></HomeButton>

@@ -2,7 +2,7 @@ import React from "react"
 import "./InputComp.css"
 
 
-const InputComp = () => {
+const InputComp = props => {
   return (
     <input
       className={`type-input ${props.className}`}

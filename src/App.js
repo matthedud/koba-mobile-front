@@ -11,6 +11,7 @@ import PlanningHebdo from "./pages/PlanningHebdo.page"
 import PlanningHome from "./pages/PlanningHome.page"
 import PhotoTake from "./pages/PhotoTake.page"
 import PhotoForm from "./pages/PhotoForm.page"
+import PointageHoraire from "./pages/PointageHoraire.page"
 import PointageChantier from "./pages/PointageChantier.page"
 import PointageTache from "./pages/PointageTache.page"
 import PointageValidation from "./pages/PointageValidation.page"
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/pointage/*">
+            <Route path="pointage-horaire" element={<PointageHoraire />} />
             <Route path="pointage-tache" element={<PointageTache />} />
             <Route path="pointage-validation" element={<PointageValidation />} />
             <Route index element={<PointageChantier />} />
