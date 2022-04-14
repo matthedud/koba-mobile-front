@@ -20,40 +20,43 @@ import { useContext } from "react"
 import { AuthContext } from "./context/AuthContext"
 
 function App() {
-  const {isLoggedIn} = useContext(AuthContext)
-  console.log({isLoggedIn})
+  const { isLoggedIn } = useContext(AuthContext)
+  console.log({ isLoggedIn })
   return (
     <div className="App">
-      <LoadingOverLay/>
-        <Routes>
-          {!isLoggedIn ? 
-          <Route path="/*" element={<Login />} /> :
+      <LoadingOverLay />
+      <Routes>
+        {!isLoggedIn ? (
           <>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/pointage/*">
-            <Route path="pointage-horaire" element={<PointageHoraire />} />
-            <Route path="pointage-tache" element={<PointageTache />} />
-            <Route path="pointage-validation" element={<PointageValidation />} />
-            <Route index element={<PointageChantier />} />
-          </Route>
-          <Route path="/planning/*" >
-            <Route path="planning-realise" element={<PlanningRealise />} />
-            <Route path="planning-hebdo" element={<PlanningHebdo />} />
-            <Route index element={<PlanningHome />} />
-          </Route>
-          <Route path="/photo/*">
-            <Route path="photo-form" element={<PhotoForm />} />
-            <Route index element={<PhotoTake />} />
-          </Route>
-          <Route path="/chantiers/*">
-            <Route index element={<ChantierList />} />
-            <Route path=":chantierID" element={<ChantierDetail />} />
-          </Route>
-          <Route path="/" element={<Home />} />
-          <Route path="/*" element={<NotFound />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/*" element={<Login />} />
           </>
-        }
-          </Routes>
+        ) : (
+          <>
+            <Route path="/pointage/*">
+              <Route path="pointage-horaire" element={<PointageHoraire />} />
+              <Route path="pointage-tache" element={<PointageTache />} />
+              <Route path="pointage-validation" element={<PointageValidation />} />
+              <Route index element={<PointageChantier />} />
+            </Route>
+            <Route path="/planning/*">
+              <Route path="planning-realise" element={<PlanningRealise />} />
+              <Route path="planning-hebdo" element={<PlanningHebdo />} />
+              <Route index element={<PlanningHome />} />
+            </Route>
+            <Route path="/photo/*">
+              <Route path="photo-form" element={<PhotoForm />} />
+              <Route index element={<PhotoTake />} />
+            </Route>
+            <Route path="/chantiers/*">
+              <Route index element={<ChantierList />} />
+              <Route path=":chantierID" element={<ChantierDetail />} />
+            </Route>
+            <Route path="/" element={<Home />} />
+            <Route path="/*" element={<NotFound />} />
+          </>
+        )}
+      </Routes>
     </div>
   )
 }
