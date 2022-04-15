@@ -4,6 +4,7 @@ import axios from "axios"
 import { AuthContext } from "../context/AuthContext"
 import DQEGrid from "../components/ag-grid/Grids/DQEGrid"
 import { LoadingContext } from "../context/LoadingContext"
+import { message } from "antd"
 
 const ChantierDetail = () => {
   const { chantierID } = useParams()
@@ -14,8 +15,13 @@ const ChantierDetail = () => {
   useEffect(() => {
     const getDQE = async () => {
       setLoading(true)
-      const DQEData = await axios.get(`${API_URL}/api/chantier/${chantierID}`)
-      if (DQEData?.data) setGridData([...DQEData.data.poste, ...DQEData.data.posteGroupe])
+      try {
+        const DQEData = await axios.get(`${API_URL}/api/chantier/${chantierID}`)
+        if (DQEData?.data) setGridData([...DQEData.data.poste, ...DQEData.data.posteGroupe])
+      } catch (err) {
+        message.error("erreur de connexion")
+        console.log({ err })
+      }
       setLoading(false)
     }
     getDQE()
