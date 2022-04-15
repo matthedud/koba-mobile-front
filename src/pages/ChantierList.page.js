@@ -1,4 +1,4 @@
-import { Button, message } from "antd"
+import { message } from "antd"
 import axios from "axios"
 import React, { Fragment, useContext, useEffect, useState } from "react"
 import ChantierListeGrid from "../components/ag-grid/Grids/ChantierListeGrid"
@@ -31,7 +31,6 @@ const ChantierList = () => {
   return (
     <Fragment>
       <ChantierListeGrid data={gridData} />
-      <Button onClick={()=>message.error('This is an error message')} >Hey</Button>
     </Fragment>
   )
 }
