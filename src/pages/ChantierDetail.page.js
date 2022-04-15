@@ -3,16 +3,20 @@ import { useParams } from "react-router-dom"
 import axios from "axios"
 import { AuthContext } from "../context/AuthContext"
 import DQEGrid from "../components/ag-grid/Grids/DQEGrid"
+import { LoadingContext } from "../context/LoadingContext"
 
 const ChantierDetail = () => {
   const { chantierID } = useParams()
   const [gridData, setGridData] = useState([])
   const { API_URL } = useContext(AuthContext)
+  const { setLoading } = useContext(LoadingContext)
 
   useEffect(() => {
     const getDQE = async () => {
+      setLoading(true)
       const DQEData = await axios.get(`${API_URL}/api/chantier/${chantierID}`)
       if (DQEData?.data) setGridData([...DQEData.data.poste, ...DQEData.data.posteGroupe])
+      setLoading(false)
     }
     getDQE()
   }, [chantierID])
