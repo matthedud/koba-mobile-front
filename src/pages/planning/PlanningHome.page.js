@@ -1,8 +1,9 @@
 import React from 'react'
+import CalendarTest from "./CalendarTest"
 
 const Planning = () => {
   return (
-    <div>Planning</div>
+    <CalendarTest/>
   )
 }
 
