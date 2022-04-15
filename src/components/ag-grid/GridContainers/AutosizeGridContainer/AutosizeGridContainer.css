@@ -1,0 +1,21 @@
+
+.grid-autosize{
+  width: 100%;
+	transform-origin: top center;
+  animation: openContent 0.4s ease-in;
+}
+
+.grid-autosize .ag-center-cols-clipper {
+  min-height: unset !important;
+}
+
+@keyframes openContent{
+  0% {
+      opacity: 0;
+      transform: scaleY(0);
+  }
+  100% {
+      opacity: 1;
+      transform: scaleY(1);
+  }
+}

@@ -1,0 +1,121 @@
+// @import "../../../style-variables.scss";
+
+$headerColor: #f4f4f4;
+
+.ag-header-viewport,
+.ag-header-container,
+.ag-header-row, .ag-header {
+  background-color: $headerColor  !important;
+  font-weight: 700 !important;
+  box-shadow: 0px 1px 5px rgba(184, 184, 184, 0.596) !important;
+  z-index: 1;
+}
+
+.ag-paging-panel{
+  height: 30px !important;
+}
+
+
+
+.ag-row{
+  background-color: white !important;
+}
+.ag-row:hover{
+  background-color: rgba(90, 186, 255, 0.082) !important;
+}
+
+.grid-groupe {
+  font-weight: 600 !important;
+  // background-color:  rgba(118, 196, 255, 0.082) !important;
+  // color: $fontColor !important;
+  // border-top: 1px solid rgb(110, 110, 110) !important;
+  font-size: 14px !important;
+}
+
+/* ----------------POSITION SECTION---------------- */
+.table-align-left {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.table-align-right {
+  text-align: right;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+.table-align-center {
+  text-align: center;
+  justify-content: center;
+}
+
+/* ----------------EDIT SECTION---------------- */
+.ag-edit-cell {
+  border: 1px solid rgba(90, 175, 255, 0.616) !important;
+  box-shadow: 0 0 2px rgba(41, 141, 255, 0.938) !important;
+  cursor: cell;
+}
+
+.cursor-edit {
+  cursor: cell;
+}
+
+.ag-edit-cell-wrong {
+  border: 1px solid rgba(255, 0, 0, 0.295) !important;
+  box-shadow: 0 0 2px red !important;
+  cursor: cell;
+}
+
+.ag-edit-cell:hover {
+  background-color: rgb(231, 244, 255);
+}
+
+.ag-cell.ag-cell-not-inline-editing.ag-cell-with-height.progress-cell.ag-cell-value {
+  display: block;
+  /* padding-top: 6px; */
+}
+
+/* ------------------------------------------------ */
+
+/* ----------------LINK POINTER SECTION---------------- */
+// .row-pointer{
+// text-decoration: underline;
+// text-decoration-color: rgb(126, 126, 126);
+// }
+
+.row-pointer:hover {
+  color: blue !important;
+  background-color: rgba(78, 113, 252, 0.048)!important;
+}
+/* ------------------------------------------------ */
+
+/* ----------------COLOR DRAG SECTION---------------- */
+
+.hover-parent {
+  background-color: rgba(0, 40, 100, 0.199) !important;
+}
+
+.drag-row-down {
+  border-bottom: 2px solid rgba(9, 255, 0, 0.925) !important;
+}
+
+.drag-row-up {
+  border-top: 2px solid rgba(9, 255, 0, 0.925) !important;
+}
+
+/* ------------------------------------------------ */
+
+.total-row {
+  background-color: rgba(164, 199, 231, 0.116);
+  // font-weight: 700;
+  // border-left: $borderSetup !important;
+  // border-right: 1px solid lightgrey !important;
+}
+
+// .span-row {
+//   background-color: rgb(255, 255, 255) !important;
+//   z-index: 100000;
+// }
+// .span-row:hover {
+//   background-color: rgba(0, 40, 100, 0.199) !important;
+// }
