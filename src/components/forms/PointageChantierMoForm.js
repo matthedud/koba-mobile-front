@@ -17,9 +17,8 @@ const PointageChantierMoForm = () => {
       setLoading(true)
       try {
         const chantierData = await getRequest(`/chantiers`)
-        const salarieData = await getRequest(`/salaries`)
-        console.log({chantierData});
         if (chantierData?.data) setChantiers(chantierData.data)
+        const salarieData = await getRequest(`/salaries`)
         if (salarieData?.data){
           const salarieList = salarieData.data.map(el=>({...el, nom:`${el.contact.nom} ${el.contact.prenom}`}))
           setSalaries(salarieList)
