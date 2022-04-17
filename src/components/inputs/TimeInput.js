@@ -1,8 +1,9 @@
 import React from "react"
-import Input from "./InputComp"
+import {TimePicker } from 'antd'
+import "./TimeInput.css"
 
 const TimeInput = (props) => {
-  return <Input className="time-input" type="time" {...props} />
+  return <TimePicker className="time-input" type="time" {...props} />
 }
 
 export default TimeInput

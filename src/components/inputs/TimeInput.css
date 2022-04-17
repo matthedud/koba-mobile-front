@@ -1,0 +1,8 @@
+.time-input{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 2rem;
+    /* font-size: 4rem; */
+    /* height: 1rem; */
+}

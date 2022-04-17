@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { AgGridReact } from "ag-grid-react"
 import FullHeightGrid from "../GridContainers/FullHeightGrid"
 
-import { ListeOptions } from "../GridOptions/GridOptions"
+import { usualGridOptions } from "../GridOptions/GridOptions"
 
 const ChantierListeGrid = forwardRef((props, ref) => {
   const { statut, data } = props
@@ -31,7 +31,7 @@ const ChantierListeGrid = forwardRef((props, ref) => {
         ref={ref}
         rowData={rowData}
         columnDefs={columnDefs}
-        gridOptions={ListeOptions}
+        gridOptions={usualGridOptions}
       />
     </FullHeightGrid>
   )

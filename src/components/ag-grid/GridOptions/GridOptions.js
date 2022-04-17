@@ -39,6 +39,7 @@ export const usualGridOptions = {
   groupDisplayType: "custom",
   groupDefaultExpanded: -1,
   suppressAggFuncInHeader: true,
+  domLayout: "autoHeight",
   columnTypes,
   rowClassRules: {
     "grid-groupe": (params) => params.node.group || params?.data?.nature === "groupe",
