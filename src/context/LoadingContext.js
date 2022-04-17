@@ -6,12 +6,12 @@ const LoadingContext = createContext()
 const LoadingProviderWrapper = (props) => {
   const [loading, setLoading] = useState(false)
 
-  const location = useLocation()
+  // const location = useLocation()
 
-  useEffect(() => {
-    setLoading(false)
-    console.log("handle route change here", location)
-  }, [location])
+  // useEffect(() => {
+  //   setLoading(false)
+  //   console.log("handle route change here", location)
+  // }, [location])
 
   return (
     <LoadingContext.Provider value={{ loading, setLoading }}>
