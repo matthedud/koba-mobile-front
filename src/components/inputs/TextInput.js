@@ -3,7 +3,7 @@ import Input from "./InputComp"
 
 const TextInput = (props) => {
   return (
-    <input
+    <Input
       className="text-input"
       type="text"
       {...props}
