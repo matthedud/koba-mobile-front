@@ -1,19 +1,21 @@
 /* table, */
-td {
+.table-planning td {
     border: 1px solid #ddd;
 }
 
-table {
+.table-planning {
     height: 100vh;
     width: 100vw;
+    border-collapse: separate;
 }
 
-td:first-child {
-    width: 80px;
+.table-planning td:first-child {
+    width: 74px;
 }
 
 .flex{
     display: flex;
+    margin: 0 auto;
 }
 
 .no-bullet{
@@ -31,7 +33,7 @@ td:first-child {
     border-radius: 5px;
     text-align: center;
     padding: 0px 5px;
-    margin: 2px 0;
+    margin: 2px 2px;
 }
 
 .task{
@@ -49,5 +51,14 @@ td:first-child {
     border-radius: 5px;
     text-align: center;
     padding: 0px 5px;
-    margin: 2px 0;   
+    margin: 2px 0;
+    width:max-content;
+    margin: 0 auto;   
+}
+
+.td-flex{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
 }
