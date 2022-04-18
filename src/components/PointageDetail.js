@@ -1,10 +1,9 @@
-import React, { useContext } from "react"
+import React from "react"
 import './PointageDetail.css'
-import { FormContext } from "../context/FormContext"
-import ListeTache from "./ListeTache"
+import InterventionGrid from "./ag-grid/Grids/InterventionGrid"
 
-const PointageDetail = () => {
-  const { form, onChange } = useContext(FormContext)
+const PointageDetail = props => {
+  console.log({props});
   return (
     <>
       <table className="table-pointage">
@@ -19,17 +18,17 @@ const PointageDetail = () => {
         </thead>
         <tbody>
           <tr>
-            <td>{form.chantier}</td>
-            <td>{form.heureDebut}</td>
-            <td>{form.heureFin}</td>
-            <td>{form.deplacment}</td>
+            <td>{props.chantier?.nom}</td>
+            <td>{props.heureDebut}</td>
+            <td>{props.heureFin}</td>
+            <td>{props.dureeDeplacement}</td>
             <td>
-              <ul>{form.salarie?.map((el) => <li>{el.nom}</li>)}</ul>
+              <ul>{props.salarie?.map((el) => <li key={el._id} >{el.nom}</li>)}</ul>
             </td>
           </tr>
         </tbody>
       </table>
-      <ListeTache />
+      <InterventionGrid data= {props.intervention} editable={false}/>
     </>
   )
 }

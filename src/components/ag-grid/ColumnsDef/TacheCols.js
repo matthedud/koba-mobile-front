@@ -1,5 +1,4 @@
 import { editSelectCol } from "./GridCols"
-import { DraggableEventRender } from "../GridRender"
 
 export const groupeColTache = (onCellClicked) => {
   return {
@@ -40,25 +39,5 @@ export const MoyenneTacheCol = (hide) => {
     type: "NombreType",
     aggFunc: "avg",
     hide,
-  }
-}
-
-export const TacheChantierDragCol = () => {
-  return {
-    type: "GroupeType",
-    headerName: "Taches",
-    valueGetter: (params) => params?.data?.nom,
-    rowGroup: false,
-    minWidth: false,
-    wrapText: false,
-    cellRendererSelector: (params) => {
-      if (!params.node?.group)
-        return {
-          component: DraggableEventRender,
-        }
-        return {
-          component: "agGroupCellRenderer",
-        }
-    },
   }
 }

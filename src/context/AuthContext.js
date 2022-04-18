@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext } from 'react'
+import { useLocation } from "react-router-dom"
 import axios from 'axios'
 
 const API_URL = 'http://localhost:5005/api'
@@ -11,17 +12,30 @@ function AuthProviderWrapper(props) {
   const [isLoading, setIsLoading] = useState(true)
   const [isAdmin, setIsAdmin] = useState(true)
   const [user, setUser] = useState(null)
+  
+  const location = useLocation()
 
-  /* 
-    Functions for handling the authentication status (isLoggedIn, isLoading, user)
-    will be added here later in the next step
-  */
+  useEffect(() => {
+    authenticateUser()
+    console.log("handle route change here", location)
+  }, [location])
+
   const storeToken = (token) => {
     localStorage.setItem('authToken', token)
   }
   const removeToken = () => {
     // Upon logout, remove the token from the localStorage
     localStorage.removeItem('authToken')
+  }
+
+  const getRequest = url => {
+    const storedToken = localStorage.getItem('authToken')
+    if (storedToken) {
+       return axios
+        .get(`${API_URL}${url}`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        })
+      }
   }
 
   const authenticateUser = () => {
@@ -79,6 +93,7 @@ function AuthProviderWrapper(props) {
   return (
     <AuthContext.Provider
       value={{
+        getRequest,
         API_URL,
         isLoggedIn,
         isLoading,

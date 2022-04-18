@@ -4,15 +4,13 @@ import { useNavigate } from "react-router-dom"
 import { AgGridReact } from "ag-grid-react"
 import FullHeightGrid from "../GridContainers/FullHeightGrid"
 
-import { ListeOptions } from "../GridOptions/GridOptions"
+import { usualGridOptions } from "../GridOptions/GridOptions"
 
 const ChantierListeGrid = forwardRef((props, ref) => {
   const { statut, data } = props
   const navigate = useNavigate()
-  console.log({ data })
-  const [rowData] = useState(data)
 
-  const onCellClicked = (params) => navigate(params.data)
+  const onCellClicked = (params) => navigate('/chantiers/'+params.data._id)
 
   const [columnDefs] = useState([
     {
@@ -29,9 +27,9 @@ const ChantierListeGrid = forwardRef((props, ref) => {
       <AgGridReact
         key={statut + 1}
         ref={ref}
-        rowData={rowData}
+        rowData={data}
         columnDefs={columnDefs}
-        gridOptions={ListeOptions}
+        gridOptions={usualGridOptions}
       />
     </FullHeightGrid>
   )

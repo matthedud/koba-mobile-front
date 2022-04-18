@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react"
-import axios from "axios"
 import { FormContext } from "../../context/FormContext"
 import { LoadingContext } from "../../context/LoadingContext"
-import { message } from "antd"
 import SelectInput from "../inputs/SelectInput"
+import { AuthContext } from "../../context/AuthContext"
+import { message } from "antd"
 
 const PointageChantierMoForm = () => {
   const { form, onChange } = useContext(FormContext)
+  const { getRequest } = useContext(AuthContext)
   const { setLoading } = useContext(LoadingContext)
   const [salaries, setSalaries] = useState([])
   const [chantiers, setChantiers] = useState([])
@@ -15,19 +16,26 @@ const PointageChantierMoForm = () => {
     const getChantierSalarier = async () => {
       setLoading(true)
       try {
-        const chantierData = await axios.get("")
+        const chantierData = await getRequest(`/chantiers`)
+        if (chantierData?.data) setChantiers(chantierData.data)
+        const salarieData = await getRequest(`/salaries`)
+        if (salarieData?.data){
+          const salarieList = salarieData.data.map(el=>({...el, nom:`${el.contact.nom} ${el.contact.prenom}`}))
+          setSalaries(salarieList)
+        }
       } catch (err) {
-        message.err("erreur de connection")
-        console.log({err});
+        message.error("erreur de connexion")
+        console.log({ err })
       }
       setLoading(false)
     }
-  })
+    getChantierSalarier()
+  }, [])
 
   return (
     <>
       <label htmlFor="chantier">
-        Chantier
+        Chantier:
         <SelectInput
           name="chantier"
           value={form.chantier}
@@ -37,7 +45,7 @@ const PointageChantierMoForm = () => {
         />
       </label>
       <label htmlFor="salarie">
-        Equipe
+        Equipe:
         <SelectInput
           name="salarie"
           value={form.salarie}

@@ -53,7 +53,7 @@ const columnTypes = {
     cellRenderer: ListeRender,
     cellEditorPopup: true,
     cellEditorPopupPosition: 'over',
-    // suppressPaste: true,
+    autoHeight: true,
     "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
   },
 
