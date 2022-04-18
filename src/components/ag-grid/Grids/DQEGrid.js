@@ -14,7 +14,6 @@ import GridTop from "../GridContainers/GridTop"
 import { treeGridOptions, bottomOptions } from "../GridOptions/GridOptions"
 
 const DQEGrid = forwardRef((props, ref) => {
-  const [rowData] = useState(props.gridData)
   const [bottomData] = useState(props.bottomData)
   
   const [columnDefs] = useState([
@@ -34,7 +33,7 @@ const DQEGrid = forwardRef((props, ref) => {
   return (
     <FullHeightGrid>
       <GridTop>
-        <AgGridReact ref={ref} rowData={rowData} columnDefs={columnDefs} gridOptions={gridOptions} />
+        <AgGridReact ref={ref} rowData={props.data} columnDefs={columnDefs} gridOptions={gridOptions} />
       </GridTop>
       <GridFooter>
         <AgGridReact rowData={bottomData} columnDefs={columnDefs} gridOptions={footerOptions} />

@@ -8,15 +8,14 @@ import { LoadingContext } from "../context/LoadingContext"
 const ChantierList = () => {
   console.log("here")
   const [gridData, setGridData] = useState([])
-  const { API_URL } = useContext(AuthContext)
+  const { getRequest } = useContext(AuthContext)
   const { setLoading } = useContext(LoadingContext)
 
   useEffect(() => {
     const getDQE = async () => {
       setLoading(true)
       try{
-        const chantierData = await axios.get(`${API_URL}/chantier`)
-        console.log("chantierData", chantierData.data)
+        const chantierData = await getRequest(`/chantiers`)
         if (chantierData?.data) setGridData(chantierData.data)
       }
       catch(err){

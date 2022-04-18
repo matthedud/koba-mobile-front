@@ -1,12 +1,14 @@
 import React, {memo} from "react"
+import './ListeRender.scss'
 
 const ListeRender = (props) => {
     let values = []
     if (props.value){
         values= props.value
-    } 
+    }
+    console.log({values});
     return ( 
-        <table style={{fontFamily: 'inherit'}}>
+        <table className="ag-liste-render" style={{fontFamily: 'inherit'}}>
             <tbody>
                 {values.map((ligne) => {
                     return (

@@ -7,11 +7,12 @@ import InterventionGrid from "../ag-grid/Grids/InterventionGrid"
 import {dateSaveFormat} from '../Format/DateFormat'
 import moment from 'moment'
 import HomeButton from "../buttons/HomeButton"
+// import ListInterventionForm from "./ListInterventionForm"
 
 const PointageTacheForm = (props) => {
   const [tacheChantier, setTacheChantier] = useState()
   const [salaries, setSalaries] = useState()
-  const { form, onChange, setForm } = useContext(FormContext)
+  const { form, setForm, onChange } = useContext(FormContext)
   const { setLoading } = useContext(LoadingContext)
   const { getRequest } = useContext(AuthContext)
 
@@ -63,6 +64,7 @@ const PointageTacheForm = (props) => {
     <>
       <HomeButton onClick={addTache}>+ Tache</HomeButton>
       <label htmlFor="Tache">Taches:</label>
+      {/* <ListInterventionForm salaries={salaries} taches={tacheChantier} /> */}
       <InterventionGrid
         data={form.intervention}
         editable={true}

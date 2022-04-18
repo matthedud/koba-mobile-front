@@ -34,7 +34,6 @@ const InterventionGrid = forwardRef((props, ref) => {
   const gridOption = {
     ...usualGridOptions,
     // groupSuppressAutoColumn : false,
-    domLayout: "autoHeight",
     stopEditingWhenCellsLoseFocus: false,
     getRowHeight: (params) => {
         const height = 30
