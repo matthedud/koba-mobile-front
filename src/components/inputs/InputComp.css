@@ -2,4 +2,6 @@
     width: 100%;
     min-width: 300px;
     margin: 5px 0;
+    border: 1px solid rgb(158, 158, 158);
+    border-radius: 10px;
 }

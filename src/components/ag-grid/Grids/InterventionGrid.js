@@ -17,10 +17,12 @@ const InterventionGrid = forwardRef((props, ref) => {
     editable,
     data,
     modifHandler,
-    clickDelete,
+    deleteIntervention,
     tacheChantier,
     salaries,
   } = props
+  
+  const clickDelete = params => deleteIntervention(params.data?._id)
 
   const [columnDefs] = useState([
     SalarieCol(editable, modifHandler, salaries),
@@ -30,6 +32,7 @@ const InterventionGrid = forwardRef((props, ref) => {
     QuantiteCol(editable, modifHandler),
     SuppCol(clickDelete, !editable),
 ])
+
 
   const gridOption = {
     ...usualGridOptions,

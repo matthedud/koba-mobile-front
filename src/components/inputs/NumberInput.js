@@ -1,9 +1,10 @@
 import React from "react"
-import Input from "./InputComp"
+import { InputNumber } from "antd"
+import  "./NumberInput.css"
 
-const NumberInput = () => {
+const NumberInput = props => {
   return (
-    <Input
+    <InputNumber
       className="number-input"
       type="number"
       {...props}

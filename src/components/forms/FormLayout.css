@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 100vh;
-    padding: 2rem 4rem;
+    /* height: 100vh; */
+    /* overflow: scroll; */
+    padding: 2rem 1rem;
 }

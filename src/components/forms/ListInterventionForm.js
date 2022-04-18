@@ -1,7 +1,6 @@
 import React, { useContext } from "react"
 import { FormContext } from "../../context/FormContext"
-import SelectInput from "../inputs/SelectInput"
-import TimeInput from "../inputs/TimeInput"
+import TacheCardForm from "../TacheCardForm"
 
 const ListInterventionForm = (props) => {
   const { form, onChange } = useContext(FormContext)
@@ -16,57 +15,11 @@ const ListInterventionForm = (props) => {
     }
   }
 
-  return (
-    <table className="table-pointage">
-      <thead>
-        <tr>
-          <th>M.O.</th>
-          <th>Taches</th>
-          <th>Durée</th>
-          <th>Unité</th>
-          <th>Quantite</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          form?.intervention?.length>0?
-          form.intervention.map((intervention) => (
-          <tr key={intervention._id}>
-            <td>
-              <SelectInput
-                name="salarie"
-                value={intervention.salarie}
-                placeholder="Equipe"
-                isMulti={true}
-                onChange={(event) => changeHandler(event, intervention._id)}
-                options={props.salaries}
-              />
-            </td>
-            <td>
-              <SelectInput
-                name="tache"
-                value={intervention.tache}
-                placeholder="Tache"
-                onChange={changeHandler}
-                options={props.taches}
-              />
-            </td>
-            <td>
-              <TimeInput
-                name="duree"
-                value={intervention.duree}
-                placeholder="Durée"
-                onChange={changeHandler}
-              />
-            </td>
-            <td>{intervention.tache?.unite?.nom}</td>
-            <td>{intervention.quantite}</td>
-            <td>remove</td>
-          </tr>
-        )):null}
-      </tbody>
-    </table>
-  )
+  return form?.intervention?.length > 0
+    ? form.intervention.map((intervention) => (
+        <TacheCardForm {...intervention} {...props} changeHandler={changeHandler} />
+      ))
+    : null
 }
 
 export default ListInterventionForm

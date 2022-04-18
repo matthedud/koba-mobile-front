@@ -7,12 +7,12 @@ import InterventionGrid from "../ag-grid/Grids/InterventionGrid"
 import {dateSaveFormat} from '../Format/DateFormat'
 import moment from 'moment'
 import HomeButton from "../buttons/HomeButton"
-// import ListInterventionForm from "./ListInterventionForm"
+import ListInterventionForm from "./ListInterventionForm"
 
 const PointageTacheForm = (props) => {
   const [tacheChantier, setTacheChantier] = useState()
   const [salaries, setSalaries] = useState()
-  const { form, setForm, onChange } = useContext(FormContext)
+  const { form, setForm } = useContext(FormContext)
   const { setLoading } = useContext(LoadingContext)
   const { getRequest } = useContext(AuthContext)
 
@@ -24,8 +24,10 @@ const PointageTacheForm = (props) => {
           const date = new Date()
           const formatedDate = moment(date).format(dateSaveFormat)
           const interventionData = await getRequest(`/tachesPrevu/${form.chantier._id}/${formatedDate}`)
-          console.log({interventionData});
-          if (interventionData?.data) setForm({...form, intervention:interventionData?.data})
+          if (interventionData?.data) {
+            const intervention = interventionData?.data.map(el=>({...el, nom:el.tache.nom}))
+            setForm({...form, intervention})
+          }
           else setForm({...form, intervention:[]})
         }
         const salarieData = await getRequest(`/salaries`)
@@ -60,18 +62,29 @@ const PointageTacheForm = (props) => {
     setForm({...form, intervention:[...form.intervention, newIntervention]})
   }
 
+  const deleteIntervention = _id =>{
+    console.log({form});
+    const index = form.intervention.findIndex(el=>el._id===_id)
+    if(index>-1){
+      const newIntervention = [...form.intervention]
+      newIntervention.splice(index, 1)
+      setForm({...form, intervention:[...form.intervention, newIntervention]})
+    }
+  }
+
   return (
     <>
       <HomeButton onClick={addTache}>+ Tache</HomeButton>
       <label htmlFor="Tache">Taches:</label>
-      {/* <ListInterventionForm salaries={salaries} taches={tacheChantier} /> */}
-      <InterventionGrid
+      <ListInterventionForm salaries={salaries} taches={tacheChantier} deleteIntervention={deleteIntervention} />
+      {/* <InterventionGrid
         data={form.intervention}
         editable={true}
         modifHendler={onChange}
         tacheChantier={tacheChantier}
         salaries={salaries}
-      />
+        deleteIntervention = {deleteIntervention}
+      /> */}
     </>
   )
 }
