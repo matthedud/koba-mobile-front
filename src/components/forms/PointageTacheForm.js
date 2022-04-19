@@ -3,9 +3,8 @@ import React, { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import { FormContext } from "../../context/FormContext"
 import { LoadingContext } from "../../context/LoadingContext"
-import InterventionGrid from "../ag-grid/Grids/InterventionGrid"
-import {dateSaveFormat} from '../Format/DateFormat'
-import moment from 'moment'
+import { dateSaveFormat } from "../Format/DateFormat"
+import moment from "moment"
 import HomeButton from "../buttons/HomeButton"
 import ListInterventionForm from "./ListInterventionForm"
 
@@ -23,12 +22,28 @@ const PointageTacheForm = (props) => {
         if (!form.intervention) {
           const date = new Date()
           const formatedDate = moment(date).format(dateSaveFormat)
-          const interventionData = await getRequest(`/tachesPrevu/${form.chantier._id}/${formatedDate}`)
+          const interventionData = await getRequest(
+            `/tachesPrevu/${form.chantier._id}/${formatedDate}`
+          )
           if (interventionData?.data) {
-            const intervention = interventionData?.data.map(el=>({...el, nom:el.tache.nom}))
-            setForm({...form, intervention})
-          }
-          else setForm({...form, intervention:[]})
+            const intervention = interventionData?.data.map((el) => {
+              const quantite = Number(
+                (
+                  (form.dureeHeure * el.rendementEquipe * form.salarie.length) /
+                  el.equipe.length
+                ).toFixed(3)
+              )
+              return {
+                ...el,
+                nom: el.tache.nom,
+                duree: form.duree,
+                quantite,
+                valide: false,
+                salarie: form.salarie,
+              }
+            })
+            setForm({ ...form, intervention })
+          } else setForm({ ...form, intervention: [] })
         }
         const salarieData = await getRequest(`/salaries`)
         if (salarieData?.data) {
@@ -39,8 +54,13 @@ const PointageTacheForm = (props) => {
           setSalaries(salarieList)
         }
         const tacheChantierData = await getRequest(`/tacheChantier/${form.chantier._id}/`)
-        console.log({tacheChantierData});
-        if (tacheChantierData?.data) setTacheChantier(tacheChantierData?.data)
+        if (tacheChantierData?.data) {
+          const tacheList = tacheChantierData?.data.map((el) => ({
+            ...el,
+            nom: el.tache.nom,
+          }))
+          setTacheChantier(tacheList)
+        }
       } catch (err) {
         message.error("erreur de connexion")
         console.log({ err })
@@ -50,25 +70,24 @@ const PointageTacheForm = (props) => {
     getChantier()
   }, [])
 
-  const addTache = () =>{
-    const duree = form.heureFin - form.heureDebut
+  const addTache = () => {
+    const duree = form.duree
     const newIntervention = {
-      _id:'N'+form.intervention.length,
-      tacheChantier:null,
-      salarie:form.salarie,
+      _id: "N" + form.intervention.length,
+      tacheChantier: null,
+      salarie: form.salarie,
       duree,
-      quantite:0
+      quantite: 0,
     }
-    setForm({...form, intervention:[...form.intervention, newIntervention]})
+    setForm({ ...form, intervention: [...form.intervention, newIntervention] })
   }
 
-  const deleteIntervention = _id =>{
-    console.log({form});
-    const index = form.intervention.findIndex(el=>el._id===_id)
-    if(index>-1){
+  const deleteIntervention = (_id) => {
+    const index = form.intervention.findIndex((el) => el._id === _id)
+    if (index > -1) {
       const newIntervention = [...form.intervention]
       newIntervention.splice(index, 1)
-      setForm({...form, intervention:[...form.intervention, newIntervention]})
+      setForm({ ...form, intervention: newIntervention })
     }
   }
 
@@ -76,15 +95,11 @@ const PointageTacheForm = (props) => {
     <>
       <HomeButton onClick={addTache}>+ Tache</HomeButton>
       <label htmlFor="Tache">Taches:</label>
-      <ListInterventionForm salaries={salaries} taches={tacheChantier} deleteIntervention={deleteIntervention} />
-      {/* <InterventionGrid
-        data={form.intervention}
-        editable={true}
-        modifHendler={onChange}
-        tacheChantier={tacheChantier}
+      <ListInterventionForm
         salaries={salaries}
-        deleteIntervention = {deleteIntervention}
-      /> */}
+        taches={tacheChantier}
+        deleteIntervention={deleteIntervention}
+      />
     </>
   )
 }

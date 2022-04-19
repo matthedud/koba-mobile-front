@@ -11,13 +11,17 @@ const ListInterventionForm = (props) => {
     if (index > -1) {
       const newValue = [...form.intervention]
       newValue[index] = { ...newValue[index], [name]: value }
-      onChange(newValue, "intervention")
+      onChange({value:newValue, name:"intervention"})
     }
   }
-
   return form?.intervention?.length > 0
     ? form.intervention.map((intervention) => (
-        <TacheCardForm {...intervention} {...props} changeHandler={changeHandler} />
+        <TacheCardForm
+          key={intervention._id}
+          {...intervention}
+          {...props}
+          changeHandler={changeHandler}
+        />
       ))
     : null
 }

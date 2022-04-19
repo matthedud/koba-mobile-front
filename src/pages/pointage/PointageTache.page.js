@@ -17,13 +17,13 @@ const PointageTache = () => {
     navigate('/pointage/pointage-horaire')
   }
   return (
-    <FormLayout>
+    <>
       <PointageTacheForm />
       <ButtonFormGroupe>
         <ReturnButton onClick={handleReturn}/>
         <SubmitButton onClick={handleSubmit}/>
       </ButtonFormGroupe>
-    </FormLayout>
+    </>
   )
 }
 

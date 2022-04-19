@@ -3,8 +3,7 @@ import NumberInput from "./inputs/NumberInput"
 import SelectInput from "./inputs/SelectInput"
 import DurationInput from "./inputs/DurationInput"
 import "./TacheCardForm.css"
-import { Button } from "antd/lib/radio"
-import SubmitButton from "./buttons/SubmitButton"
+import CheckButton from "./buttons/CheckButton"
 import DeleteButton from "./buttons/DeleteButton"
 import ButtonFormGroupe from "./buttons/ButtonFormGroupe"
 
@@ -15,9 +14,10 @@ const TacheCardForm = (props) => {
         name="tache"
         value={props.tache}
         placeholder="Tache"
-        onChange={props.changeHandler}
+        onChange={(event) => props.changeHandler(event, props._id)}
         options={props.taches}
       />
+      {props.tache?
       <div className="tache-card-subcontent">
         <SelectInput
           name="salarie"
@@ -27,25 +27,32 @@ const TacheCardForm = (props) => {
           onChange={(event) => props.changeHandler(event, props._id)}
           options={props.salaries}
         />
-          <div className="tache-card-quantite">
-            <DurationInput
-              name="duree"
-              value={props.duree}
-              placeholder="Durée"
-              onChange={props.changeHandler}
-            />
-            <NumberInput
-              name="quantite"
-              value={props.quantite}
-              placeholder="quantite"
-              onChange={props.changeHandler}
-              addonAfter={props.tache?.unite?.nom}
-            />
+        <div className="tache-card-quantite">
+          <DurationInput
+            name="duree"
+            value={props.duree}
+            placeholder="Durée"
+            onChange={(event) => props.changeHandler(event, props._id)}
+            addonAfter='h'
+          />
+          <NumberInput
+            key={props.tache._id}
+            name="quantite"
+            value={props.quantite}
+            placeholder="quantite"
+            onChange={(event) => props.changeHandler(event, props._id)}
+            addonAfter={props.tache?.unite?.nom}
+          />
         </div>
       </div>
+      :null}
       <ButtonFormGroupe>
-        {props.valide ? null : <SubmitButton onClick={() => props.deleteIntervention(props._id)} />}
         <DeleteButton onClick={() => props.deleteIntervention(props._id)} />
+        {props.valide ? <div/> : (
+          <CheckButton
+            onClick={() => props.changeHandler({ value: true, name: "valide" }, props._id)}
+          />
+        )}
       </ButtonFormGroupe>
     </div>
   )

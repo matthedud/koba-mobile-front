@@ -4,14 +4,16 @@
     margin: 1rem 0;
     padding: 0.5rem;
     width: 100%;
-    border: 1px solid rgb(196, 196, 196);
-    box-shadow: 2px 2px 2px rgb(133, 133, 133);
+    /* border: 1px solid rgb(255, 139, 139); */
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px 2px rgb(255, 159, 159);
     min-width: 300px;
     height: 100%;
-    background-color: rgb(249, 71, 71);
+    /* background-color: rgb(249, 71, 71); */
 }
-.tache-card .true{
-    background-color: rgb(61, 255, 61);
+.tache-card.true{
+    /* border: 1px solid rgb(46, 235, 46); */
+    box-shadow: 0px 0px 3px 2px rgb(19, 248, 19);
 }
 
 .tache-card-subcontent{
@@ -20,12 +22,13 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 0.5rem;
+    margin-bottom: -0.3rem;
 }
 .tache-card-subcontent .select{
     /* height: 100%; */
     min-width: 300px;
     flex: 1;
+    border: none;
 }
 
 .tache-card-numbers{

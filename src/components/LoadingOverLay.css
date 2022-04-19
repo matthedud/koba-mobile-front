@@ -3,6 +3,8 @@
   background: #00000080;
   height: 100vh;
   width: 100vw;
+  top: 0;
+  left: 0;
   transition: all 200ms ease-in;
   display: none;
 }
@@ -11,6 +13,7 @@
   height: 40vmin;
   pointer-events: none;
   top: 20vh;
+  left: 40vw;
   position: fixed;
   color: aqua;
   z-index: 50;

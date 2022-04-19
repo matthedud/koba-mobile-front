@@ -1,0 +1,8 @@
+.check-button{
+    background-color: white;
+    color: green;
+    border: 1px solid green;
+    width: auto;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+}

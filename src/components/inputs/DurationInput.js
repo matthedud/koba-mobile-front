@@ -11,11 +11,13 @@ const DurationInput = (props) => {
 
   return (
     <TimePicker
+      {...props}
       className="duration-input"
       type="time"
       value={moment(props.value, format)}
       format={format}
-      {...props}
+      onChange={changeHandler}
+      status={props.value?'':"error"}
     />
   )
 }

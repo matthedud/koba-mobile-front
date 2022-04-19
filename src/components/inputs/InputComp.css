@@ -5,3 +5,8 @@
     border: 1px solid rgb(158, 158, 158);
     border-radius: 10px;
 }
+
+.invalide{
+    box-shadow: 0 0 2px 1px rgb(250, 36, 36) !important;
+    border-radius: 4px;
+}
