@@ -8,7 +8,7 @@ import moment from "moment"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom"
 import ButtonComp from "../buttons/ButtonComp"
-import TacheCardForm from "../TacheCardForm"
+import TacheCardForm from "./TacheCardForm"
 import SalarieHeureCompteur from "../inputs/SalarieHeureCompteur"
 
 let counter = 0
@@ -84,6 +84,10 @@ const PointageTacheForm = (props) => {
       quantite: 0,
     }
     setForm({ ...form, intervention: [newIntervention, ...form.intervention] })
+  }
+
+  const refreshHeureTravailler = ()=>{
+    
   }
 
   return (

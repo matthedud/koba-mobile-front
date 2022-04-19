@@ -1,8 +1,11 @@
 import { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext'
-
+import './LoginForm.css'
+import TextInput from '../inputs/TextInput'
+import PasswordInput from '../inputs/PasswordInput'
+import ButtonComp from '../buttons/ButtonComp'
 
 function LoginForm(props) {
   const { storeToken, authenticateUser, API_URL} = useContext(AuthContext)
@@ -47,7 +50,7 @@ function LoginForm(props) {
 
       <form onSubmit={handleLoginSubmit}>
         <label>Username:</label>
-        <input
+        <TextInput
           type="text"
           name="username"
           value={username}
@@ -55,14 +58,12 @@ function LoginForm(props) {
         />
 
         <label>Password:</label>
-        <input
-          type="password"
-          name="password"
+        <PasswordInput
           value={password}
           onChange={handlePassword}
         />
 
-        <button type="submit">Login</button>
+        <ButtonComp type="submit">Login</ButtonComp>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}

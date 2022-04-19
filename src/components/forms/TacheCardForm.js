@@ -1,12 +1,12 @@
 import React, { useContext } from "react"
-import NumberInput from "./inputs/NumberInput"
-import SelectInput from "./inputs/SelectInput"
-import DurationInput from "./inputs/DurationInput"
+import NumberInput from "../inputs/NumberInput"
+import SelectInput from "../inputs/SelectInput"
+import DurationInput from "../inputs/DurationInput"
 import "./TacheCardForm.css"
-import CheckButton from "./buttons/CheckButton"
-import DeleteButton from "./buttons/DeleteButton"
-import ButtonFormGroupe from "./buttons/ButtonFormGroupe"
-import { FormContext } from "../context/FormContext"
+import CheckButton from "../buttons/CheckButton"
+import DeleteButton from "../buttons/DeleteButton"
+import ButtonFormGroupe from "../buttons/ButtonFormGroupe"
+import { FormContext } from "../../context/FormContext"
 
 const TacheCardForm = (props) => {
   const { form, onChange, setForm } = useContext(FormContext)
@@ -72,7 +72,7 @@ const TacheCardForm = (props) => {
         <DeleteButton onClick={deleteIntervention} />
         {props.valide ? <div/> : (
           <CheckButton
-            onClick={() => props.changeHandler({ value: true, name: "valide" }, props._id)}
+            onClick={() => changeHandler({ value: true, name: "valide" }, props._id)}
           />
         )}
       </ButtonFormGroupe>
