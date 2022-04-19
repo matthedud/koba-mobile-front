@@ -6,16 +6,16 @@ import "./InputComp.css"
 
 const NumberInput = props => {
 
-  const changeHandler =  (value) =>{
-    console.log({value});
-    props.onChange({value, name:props.name})
+  const changeHandler =  (event) =>{
+    const value =parseFloat(event)
+    if(!isNaN(value)) props.onChange({value, name:props.name})
   }
   return (
     <InputNumber
       {...props}
       className={`number-input ${props.value?'':"invalide"}`}
       type="number"
-      onchange={changeHandler}
+      onChange={changeHandler}
     />
   )
 }

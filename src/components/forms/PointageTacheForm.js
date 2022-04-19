@@ -5,20 +5,26 @@ import { FormContext } from "../../context/FormContext"
 import { LoadingContext } from "../../context/LoadingContext"
 import { dateSaveFormat } from "../Format/DateFormat"
 import moment from "moment"
-import { AiOutlinePlusCircle } from 'react-icons/ai'
-import ListInterventionForm from "./ListInterventionForm"
+import { AiOutlinePlusCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom"
 import ButtonComp from "../buttons/ButtonComp"
+import TacheCardForm from "../TacheCardForm"
+import SalarieHeureCompteur from "../inputs/SalarieHeureCompteur"
+
+let counter = 0
 
 const PointageTacheForm = (props) => {
   const [tacheChantier, setTacheChantier] = useState()
-  const [salaries, setSalaries] = useState()
   const { form, setForm } = useContext(FormContext)
   const { setLoading } = useContext(LoadingContext)
   const { getRequest } = useContext(AuthContext)
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (!form.chantier) {
+      message.error("pointage erroné")
+      navigate("/pointage")
+    }
     const getChantier = async () => {
       setLoading(true)
       try {
@@ -36,9 +42,10 @@ const PointageTacheForm = (props) => {
                   el.equipe.length
                 ).toFixed(3)
               )
+              counter++
               return {
-                ...el,
-                tacheChantier:{...el},
+                _id: "N" + counter,
+                tacheChantier: { ...el },
                 nom: el.tache.nom,
                 duree: form.duree,
                 quantite,
@@ -48,14 +55,6 @@ const PointageTacheForm = (props) => {
             })
             setForm({ ...form, intervention })
           } else setForm({ ...form, intervention: [] })
-        }
-        const salarieData = await getRequest(`/salaries`)
-        if (salarieData?.data) {
-          const salarieList = salarieData.data.map((el) => ({
-            ...el,
-            nom: `${el.contact.nom} ${el.contact.prenom}`,
-          }))
-          setSalaries(salarieList)
         }
         const tacheChantierData = await getRequest(`/tacheChantier/${form.chantier._id}/`)
         if (tacheChantierData?.data) {
@@ -76,8 +75,9 @@ const PointageTacheForm = (props) => {
 
   const addTache = () => {
     const duree = form.duree
+    counter++
     const newIntervention = {
-      _id: "N" + form.intervention.length,
+      _id: "N" + counter,
       tacheChantier: null,
       salarie: form.salarie,
       duree,
@@ -86,28 +86,17 @@ const PointageTacheForm = (props) => {
     setForm({ ...form, intervention: [newIntervention, ...form.intervention] })
   }
 
-  const deleteIntervention = (_id) => {
-    const index = form.intervention.findIndex((el) => el._id === _id)
-    if (index > -1) {
-      const newIntervention = [...form.intervention]
-      newIntervention.splice(index, 1)
-      setForm({ ...form, intervention: newIntervention })
-    }
-  }
-
-  
-  if(!form.chantier){
-    message.error('pointage erroné')
-    navigate('/pointage')
-  }
   return (
     <>
-      <ButtonComp onClick={addTache}><AiOutlinePlusCircle /> Tache <div/></ButtonComp>
-      <ListInterventionForm
-        salaries={salaries}
-        taches={tacheChantier}
-        deleteIntervention={deleteIntervention}
-      />
+      <ButtonComp onClick={addTache}>
+        <AiOutlinePlusCircle /> Ajouter Tache <div />
+      </ButtonComp>
+      {form?.intervention?.length > 0
+        ? form.intervention.map((intervention) => (
+            <TacheCardForm key={intervention._id} {...intervention} taches={tacheChantier} />
+          ))
+        : null}
+      {form?.intervention?<SalarieHeureCompteur />:null} 
     </>
   )
 }

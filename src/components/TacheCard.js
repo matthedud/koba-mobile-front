@@ -1,35 +1,26 @@
 import React from "react"
 import "./TacheCardForm.css"
-import SubmitButton from "./buttons/SubmitButton"
-import DeleteButton from "./buttons/DeleteButton"
-import ButtonFormGroupe from "./buttons/ButtonFormGroupe"
+import "./TacheCard.css"
 
-const TacheCardForm = (props) => {
+const TacheCard = (props) => {
   return (
-    <div className={`tache-card ${props.valide}`}>
+    props.tacheChantier? 
+      <div className={`tache-card`}>
       <p>
-        <strong>{props.tache.nom}</strong>
+        <strong>{props.tacheChantier?.tache.nom}</strong>
       </p>
-
       <div className="tache-card-subcontent">
-        <p>{props.salarie.map((el) => el.nom)}</p>
-
-        <div className="tache-card-quantite">
+        <ul>{props.salarie.map((el) => <li>{el.nom}</li>)}</ul>
+        <div className="tache-card-number">
           <p>{props.duree}(h)</p>
           <p>
-            {props.quantite}
-            {props.tache.unite.nom}
+            {props.quantite}{' '}{props.tacheChantier?.tache.unite.nom}
           </p>
         </div>
       </div>
-      <ButtonFormGroupe>
-        <DeleteButton onClick={() => props.deleteIntervention(props._id)} />
-        <SubmitButton
-          onClick={() => props.changeHandler({ value: true, name: "valide" }, props._id)}
-        />
-      </ButtonFormGroupe>
     </div>
+      : null
   )
 }
 
-export default TacheCardForm
+export default TacheCard

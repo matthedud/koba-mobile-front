@@ -4,15 +4,13 @@
     margin: 1rem 0;
     padding: 0.5rem;
     width: 100%;
-    /* border: 1px solid rgb(255, 139, 139); */
-    border-radius: 5px;
+    border: 1px solid rgb(253, 157, 157);
     box-shadow:  0px 0px 7px 1px rgb(249, 87, 87);
     min-width: 300px;
-    /* background-color: rgb(249, 71, 71); */
 }
 .tache-card.true{
-    /* border: 1px solid rgb(46, 235, 46); */
-    box-shadow: 0px 0px 7px 1px rgb(44, 171, 44);
+    border: 1px solid rgb(75, 246, 75);
+    box-shadow: 0px 0px 7px 1px rgb(67, 184, 67);
 }
 
 .tache-card-subcontent{
@@ -23,6 +21,7 @@
     flex-wrap: wrap;
     margin-bottom: -0.3rem;
 }
+
 .tache-card-subcontent .select{
     /* height: 100%; */
     min-width: 300px;

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import NumberInput from "./inputs/NumberInput"
 import SelectInput from "./inputs/SelectInput"
 import DurationInput from "./inputs/DurationInput"
@@ -6,15 +6,38 @@ import "./TacheCardForm.css"
 import CheckButton from "./buttons/CheckButton"
 import DeleteButton from "./buttons/DeleteButton"
 import ButtonFormGroupe from "./buttons/ButtonFormGroupe"
+import { FormContext } from "../context/FormContext"
 
 const TacheCardForm = (props) => {
+  const { form, onChange, setForm } = useContext(FormContext)
+
+
+  const changeHandler = (event) => {
+    const { value, name } = event.target || event
+    const index = form.intervention.findIndex((el) => el._id === props._id)
+    if (index > -1) {
+      const newValue = [...form.intervention]
+      newValue[index] = { ...newValue[index], [name]: value }
+      onChange({ value: newValue, name: "intervention" })
+    }
+  }
+  
+  const deleteIntervention = () => {
+    const index = form.intervention.findIndex((el) => el._id === props._id)
+    if (index > -1) {
+      const newIntervention = [...form.intervention]
+      newIntervention.splice(index, 1)
+      setForm({ ...form, intervention: newIntervention })
+    }
+  }
+
   return (
     <div className={`tache-card ${props.valide}`}>
       <SelectInput
         name="tacheChantier"
         value={props.tacheChantier?.tache}
         placeholder="Tache"
-        onChange={(event) => props.changeHandler(event, props._id)}
+        onChange={changeHandler}
         options={props.taches}
       />
       {props.tacheChantier?
@@ -24,29 +47,29 @@ const TacheCardForm = (props) => {
           value={props.salarie}
           placeholder="Equipe"
           isMulti={true}
-          onChange={(event) => props.changeHandler(event, props._id)}
-          options={props.salaries}
+          onChange={changeHandler}
+          options={form.salarie}
         />
         <div className="tache-card-quantite">
           <DurationInput
             name="duree"
             value={props.duree}
             placeholder="Durée"
-            onChange={(event) => props.changeHandler(event, props._id)}
+            onChange={changeHandler}
             addonAfter='h'
           />
           <NumberInput
             name="quantite"
             value={props.quantite}
             placeholder="quantite"
-            onChange={(event) => props.changeHandler(event, props._id)}
+            onChange={changeHandler}
             addonAfter={props.tacheChantier.tache?.unite?.nom}
           />
         </div>
       </div>
       :null}
       <ButtonFormGroupe>
-        <DeleteButton onClick={() => props.deleteIntervention(props._id)} />
+        <DeleteButton onClick={deleteIntervention} />
         {props.valide ? <div/> : (
           <CheckButton
             onClick={() => props.changeHandler({ value: true, name: "valide" }, props._id)}

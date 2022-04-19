@@ -16,7 +16,8 @@ const PointageHoraireForm = (props) => {
   }
 
   return (
-    <div className="horaire-form">
+    <>
+    <div/>
       <label>
         Horaire chantier:
         <div className="horaire-chantier">
@@ -38,7 +39,7 @@ const PointageHoraireForm = (props) => {
           onChange={onChange}
         />
       </label>
-    </div>
+    </>
   )
 }
 
