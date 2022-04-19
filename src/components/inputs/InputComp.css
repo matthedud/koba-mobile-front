@@ -7,6 +7,7 @@
 }
 
 .invalide{
-    box-shadow: 0 0 2px 1px rgb(250, 36, 36) !important;
-    border-radius: 4px;
+    /* border: 1px solid rgb(225, 67, 67) ; */
+    box-shadow: 0 0 3px 1px red !important;
+    border-radius: 6px;
 }

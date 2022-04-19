@@ -5,8 +5,10 @@ import { FormContext } from "../../context/FormContext"
 import { LoadingContext } from "../../context/LoadingContext"
 import { dateSaveFormat } from "../Format/DateFormat"
 import moment from "moment"
-import HomeButton from "../buttons/HomeButton"
+import { AiOutlinePlusCircle } from 'react-icons/ai'
 import ListInterventionForm from "./ListInterventionForm"
+import { useNavigate } from "react-router-dom"
+import ButtonComp from "../buttons/ButtonComp"
 
 const PointageTacheForm = (props) => {
   const [tacheChantier, setTacheChantier] = useState()
@@ -14,6 +16,7 @@ const PointageTacheForm = (props) => {
   const { form, setForm } = useContext(FormContext)
   const { setLoading } = useContext(LoadingContext)
   const { getRequest } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getChantier = async () => {
@@ -22,11 +25,11 @@ const PointageTacheForm = (props) => {
         if (!form.intervention) {
           const date = new Date()
           const formatedDate = moment(date).format(dateSaveFormat)
-          const interventionData = await getRequest(
+          const tacheChantierData = await getRequest(
             `/tachesPrevu/${form.chantier._id}/${formatedDate}`
           )
-          if (interventionData?.data) {
-            const intervention = interventionData?.data.map((el) => {
+          if (tacheChantierData?.data) {
+            const intervention = tacheChantierData?.data.map((el) => {
               const quantite = Number(
                 (
                   (form.dureeHeure * el.rendementEquipe * form.salarie.length) /
@@ -35,6 +38,7 @@ const PointageTacheForm = (props) => {
               )
               return {
                 ...el,
+                tacheChantier:{...el},
                 nom: el.tache.nom,
                 duree: form.duree,
                 quantite,
@@ -79,7 +83,7 @@ const PointageTacheForm = (props) => {
       duree,
       quantite: 0,
     }
-    setForm({ ...form, intervention: [...form.intervention, newIntervention] })
+    setForm({ ...form, intervention: [newIntervention, ...form.intervention] })
   }
 
   const deleteIntervention = (_id) => {
@@ -91,10 +95,14 @@ const PointageTacheForm = (props) => {
     }
   }
 
+  
+  if(!form.chantier){
+    message.error('pointage erroné')
+    navigate('/pointage')
+  }
   return (
     <>
-      <HomeButton onClick={addTache}>+ Tache</HomeButton>
-      <label htmlFor="Tache">Taches:</label>
+      <ButtonComp onClick={addTache}><AiOutlinePlusCircle /> Tache <div/></ButtonComp>
       <ListInterventionForm
         salaries={salaries}
         taches={tacheChantier}

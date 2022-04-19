@@ -1,4 +1,6 @@
+import { message } from "antd"
 import React, { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import { FormContext } from "../../context/FormContext"
 import DurationInput from "../inputs/DurationInput"
 import TimeInput from "../inputs/TimeInput"
@@ -6,7 +8,12 @@ import "./PointageHoraireForm.css"
 
 const PointageHoraireForm = (props) => {
   const { form, onChange } = useContext(FormContext)
-  console.log({ form })
+  const navigate = useNavigate()  
+  
+  if(!form.chantier){
+    message.error('pointage erroné')
+    navigate('/pointage')
+  }
 
   return (
     <div className="horaire-form">

@@ -1,12 +1,14 @@
 .button-component{
     display: flex;
-    font-size: 1rem;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
     margin: 5px 0;
     border: none;
     padding: 0.5rem;
     cursor: pointer;
-    justify-content: space-around;
-    align-items: center;
     gap: 0.3rem;
+    background-color: rgba(5, 47, 102, 0.973);;
+    color: white;
+    border: none;
 }

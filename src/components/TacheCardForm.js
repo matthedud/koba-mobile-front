@@ -11,13 +11,13 @@ const TacheCardForm = (props) => {
   return (
     <div className={`tache-card ${props.valide}`}>
       <SelectInput
-        name="tache"
-        value={props.tache}
+        name="tacheChantier"
+        value={props.tacheChantier?.tache}
         placeholder="Tache"
         onChange={(event) => props.changeHandler(event, props._id)}
         options={props.taches}
       />
-      {props.tache?
+      {props.tacheChantier?
       <div className="tache-card-subcontent">
         <SelectInput
           name="salarie"
@@ -36,12 +36,11 @@ const TacheCardForm = (props) => {
             addonAfter='h'
           />
           <NumberInput
-            key={props.tache._id}
             name="quantite"
             value={props.quantite}
             placeholder="quantite"
             onChange={(event) => props.changeHandler(event, props._id)}
-            addonAfter={props.tache?.unite?.nom}
+            addonAfter={props.tacheChantier.tache?.unite?.nom}
           />
         </div>
       </div>
