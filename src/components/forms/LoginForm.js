@@ -1,8 +1,11 @@
 import { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext'
-
+import './LoginForm.css'
+import TextInput from '../inputs/TextInput'
+import PasswordInput from '../inputs/PasswordInput'
+import ButtonComp from '../buttons/ButtonComp'
 
 function LoginForm(props) {
   const { storeToken, authenticateUser, API_URL} = useContext(AuthContext)
@@ -43,26 +46,24 @@ function LoginForm(props) {
 
   return (
     <div className="LoginPage">
-      <h1>Login</h1>
+      <h1>Connection</h1>
 
       <form onSubmit={handleLoginSubmit}>
-        <label>Username:</label>
-        <input
+        <label>Identifiant:</label>
+        <TextInput
           type="text"
           name="username"
           value={username}
           onChange={handleUsername}
         />
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
+        <label>Mot de Passe:</label>
+        <PasswordInput
           value={password}
           onChange={handlePassword}
         />
 
-        <button type="submit">Login</button>
+        <ButtonComp type="submit">Connecter</ButtonComp>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}

@@ -1,11 +1,14 @@
 import React, { Fragment, useContext, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 import DQEGrid from "../components/ag-grid/Grids/DQEGrid"
 import { LoadingContext } from "../context/LoadingContext"
 import { message } from "antd"
+import ReturnButton from "../components/buttons/ReturnButton"
 
 const ChantierDetail = () => {
+  const navigate = useNavigate()
+
   const { chantierID } = useParams()
   const [gridData, setGridData] = useState([])
   const { getRequest } = useContext(AuthContext)
@@ -26,22 +29,13 @@ const ChantierDetail = () => {
     getDQE()
   }, [chantierID])
 
-  const total = gridData.reduce(
-    (total, poste) => (poste?.quantite ? total + poste.prixUnitaire * poste.quantite : total),
-    0
-  )
 
-  const bottomData = [
-    {
-      hierarchie: [""],
-      total: total,
-      nature: "footer",
-    },
-  ]
+
 
   return (
     <Fragment>
-      <DQEGrid data={gridData} bottomData={bottomData} />
+      <DQEGrid data={gridData}  />
+      <ReturnButton onClick={()=>navigate('/chantiers')} />
     </Fragment>
   )
 }

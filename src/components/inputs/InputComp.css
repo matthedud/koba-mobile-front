@@ -3,5 +3,11 @@
     min-width: 300px;
     margin: 5px 0;
     border: 1px solid rgb(158, 158, 158);
-    border-radius: 10px;
+    /* border-radius: 4px; */
+}
+
+.invalide{
+    border: 1px solid rgb(255, 0, 0) !important;
+    box-shadow: 0 0 2px 1px rgb(253, 118, 118) !important;
+    /* border-radius: 4px; */
 }

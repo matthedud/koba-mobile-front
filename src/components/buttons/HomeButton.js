@@ -1,9 +1,10 @@
 import React from 'react'
+import ButtonComp from './ButtonComp'
 import './HomeButton.css'
 
 const HomeButton = props => {
   return (
-    <button className='home-btn' onClick={props.onClick}>{props.children}</button>
+    <ButtonComp className='home-btn' onClick={props.onClick}>{props.children}</ButtonComp>
   )
 }
 

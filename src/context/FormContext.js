@@ -6,7 +6,6 @@ const FormProviderWrapper = (props) => {
   const [form, setForm] = useState({})
 
   const onChange = (event) => {
-    console.log({event});
     const { value, name } = event.target || event
     setForm({ ...form, [name]: value })
   }

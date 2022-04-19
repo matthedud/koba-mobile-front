@@ -1,10 +1,11 @@
 import React from 'react'
 import ButtonComp from './ButtonComp'
-import './ReturnButton.css'
+import './DeleteButton.css'
+import { DeleteOutlined } from '@ant-design/icons'
 
 const DeleteButton = props => {
   return (
-    <ButtonComp className='delete-button' onClick={props.onClick}>Supprimer</ButtonComp>
+    <ButtonComp className='delete-button' onClick={props.onClick}><DeleteOutlined />Supprimer</ButtonComp>
   )
 }
 

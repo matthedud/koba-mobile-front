@@ -1,0 +1,12 @@
+.salarie-heure-compteur-card{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
+}
+
+.salarie-heure-compteur-card ul{
+    text-align: left;
+}

@@ -1,8 +1,7 @@
-.delete-button{
+.check-button{
     background-color: white;
-    color: red;
-    border: 1px solid red;
-    font-weight: 500;
+    color: green;
+    border: 1px solid green;
     width: auto;
     padding: 0.2rem 0.5rem;
     /* border-radius: 3px; */

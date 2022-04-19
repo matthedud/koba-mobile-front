@@ -1,0 +1,10 @@
+.form-card{
+    border: 1px solid rgb(204, 204, 204);
+    box-shadow: 1px 1px 4px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 3rem;
+    padding: 2rem 0.5rem;
+}

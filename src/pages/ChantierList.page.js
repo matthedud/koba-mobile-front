@@ -1,15 +1,16 @@
 import { message } from "antd"
-import axios from "axios"
-import React, { Fragment, useContext, useEffect, useState } from "react"
-import ChantierListeGrid from "../components/ag-grid/Grids/ChantierListeGrid"
+import React, { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import ReturnButton from "../components/buttons/ReturnButton"
+import ChantierCardList from "../components/ChantierCardList"
 import { AuthContext } from "../context/AuthContext"
 import { LoadingContext } from "../context/LoadingContext"
 
 const ChantierList = () => {
-  console.log("here")
   const [gridData, setGridData] = useState([])
   const { getRequest } = useContext(AuthContext)
   const { setLoading } = useContext(LoadingContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getDQE = async () => {
@@ -28,9 +29,11 @@ const ChantierList = () => {
   }, [])
 
   return (
-    <Fragment>
-      <ChantierListeGrid data={gridData} />
-    </Fragment>
+    <>
+      {gridData.map(chantier=><ChantierCardList key={chantier._id} {...chantier} />)}
+      <ReturnButton onClick={()=>navigate('/')} />
+
+    </>
   )
 }
 
