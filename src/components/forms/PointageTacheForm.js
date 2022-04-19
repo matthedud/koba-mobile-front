@@ -1,15 +1,16 @@
-import { message } from "antd"
 import React, { useContext, useEffect, useState } from "react"
+import moment from "moment"
+import { message } from "antd"
 import { AuthContext } from "../../context/AuthContext"
 import { FormContext } from "../../context/FormContext"
 import { LoadingContext } from "../../context/LoadingContext"
 import { dateSaveFormat } from "../Format/DateFormat"
-import moment from "moment"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom"
 import ButtonComp from "../buttons/ButtonComp"
 import TacheCardForm from "./TacheCardForm"
 import SalarieHeureCompteur from "../inputs/SalarieHeureCompteur"
+import FormCard from "../FormCard"
 
 let counter = 0
 
@@ -86,9 +87,7 @@ const PointageTacheForm = (props) => {
     setForm({ ...form, intervention: [newIntervention, ...form.intervention] })
   }
 
-  const refreshHeureTravailler = ()=>{
-    
-  }
+  const refreshHeureTravailler = () => {}
 
   return (
     <>
@@ -100,7 +99,11 @@ const PointageTacheForm = (props) => {
             <TacheCardForm key={intervention._id} {...intervention} taches={tacheChantier} />
           ))
         : null}
-      {form?.intervention?<SalarieHeureCompteur />:null} 
+      {form?.intervention ? (
+        <FormCard>
+          <SalarieHeureCompteur />
+        </FormCard>
+      ) : null}
     </>
   )
 }

@@ -20,7 +20,7 @@ const SalarieHeureCompteur = (props) => {
   })
 
   return <div className="salarie-heure-compteur-card">
-    <h2>Heure restant à pointer</h2>
+    <h2>Heures restant à pointer</h2>
   <ul>{
     data.map(salarie=><li>{`${salarie.nom} : ${salarie.heures}`}</li>)
   }</ul></div>
