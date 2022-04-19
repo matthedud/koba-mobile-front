@@ -1,7 +1,6 @@
 import { message } from "antd"
-import axios from "axios"
-import React, { Fragment, useContext, useEffect, useState } from "react"
-import ChantierListeGrid from "../components/ag-grid/Grids/ChantierListeGrid"
+import React, { useContext, useEffect, useState } from "react"
+import ChantierCardList from "../components/ChantierCardList"
 import { AuthContext } from "../context/AuthContext"
 import { LoadingContext } from "../context/LoadingContext"
 
@@ -28,9 +27,7 @@ const ChantierList = () => {
   }, [])
 
   return (
-    <Fragment>
-      <ChantierListeGrid data={gridData} />
-    </Fragment>
+    gridData.map(chantier=><ChantierCardList key={chantier._id} {...chantier} />)
   )
 }
 

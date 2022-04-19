@@ -1,0 +1,41 @@
+.chantier-card-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border: 1px solid rgb(186, 204, 255);
+    box-shadow: 1px 1px 3px rgb(104, 147, 198);
+    margin: 1rem 0;
+    padding: 0.7rem 1rem;
+}
+
+
+.chantier-card-list h3{
+    color: rgb(12, 12, 96);
+    font-weight: 600;
+}
+
+.chantier-card-list .element-line{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.chantier-card-list .element-item{
+    display: flex;
+    /* width: 100%; */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+    border: 1px solid rgb(186, 204, 255);
+    color: rgb(0, 0, 125);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.chantier-card-list .element-item:hover{
+    background-color: rgb(0, 0, 125);
+    color: white;
+}

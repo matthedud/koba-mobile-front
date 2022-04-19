@@ -46,10 +46,10 @@ function LoginForm(props) {
 
   return (
     <div className="LoginPage">
-      <h1>Login</h1>
+      <h1>Connection</h1>
 
       <form onSubmit={handleLoginSubmit}>
-        <label>Username:</label>
+        <label>Identifiant:</label>
         <TextInput
           type="text"
           name="username"
@@ -57,13 +57,13 @@ function LoginForm(props) {
           onChange={handleUsername}
         />
 
-        <label>Password:</label>
+        <label>Mot de Passe:</label>
         <PasswordInput
           value={password}
           onChange={handlePassword}
         />
 
-        <ButtonComp type="submit">Login</ButtonComp>
+        <ButtonComp type="submit">Connecter</ButtonComp>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}

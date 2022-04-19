@@ -2,6 +2,7 @@ import { message } from "antd"
 import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { FormContext } from "../../context/FormContext"
+import FormCard from "../FormCard"
 import DurationInput from "../inputs/DurationInput"
 import TimeInput from "../inputs/TimeInput"
 import "./PointageHoraireForm.css"
@@ -17,9 +18,10 @@ const PointageHoraireForm = (props) => {
 
   return (
     <>
-    <div/>
+    <h1>Horaire Chantier</h1>
+    <FormCard >
       <label>
-        Horaire chantier:
+        Heures sur chantier:
         <div className="horaire-chantier">
           <TimeInput
             name="heureDebut"
@@ -39,6 +41,7 @@ const PointageHoraireForm = (props) => {
           onChange={onChange}
         />
       </label>
+      </FormCard>
     </>
   )
 }
