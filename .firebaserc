@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "koba-340618"
+  },
+  "targets": {
+    "koba-340618": {
+      "hosting": {
+        "koba-340618": [
+          "koba-mobile"
+        ]
+      }
+    }
+  }
+}
