@@ -50,12 +50,19 @@ function LoginForm(props) {
       <form onSubmit={handleLoginSubmit}>
         <label>
           Identifiant:
-          <TextInput type="text" name="username" value={username} onChange={handleUsername} />
+          <TextInput
+            type="text"
+            name="username"
+            value={username}
+            onChange={handleUsername}
+            placeHolder={"Identifiant"}
+            zeroOK
+          />
         </label>
 
         <label>
           Mot de Passe:
-          <PasswordInput value={password} onChange={handlePassword} />
+          <PasswordInput value={password} onChange={handlePassword} zeroOK/>
         </label>
 
         <ButtonComp type="submit">Connecter</ButtonComp>

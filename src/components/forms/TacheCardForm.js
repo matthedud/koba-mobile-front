@@ -5,7 +5,7 @@ import DurationInput from "../inputs/DurationInput"
 import "./TacheCardForm.css"
 import CheckButton from "../buttons/CheckButton"
 import DeleteButton from "../buttons/DeleteButton"
-import ButtonFormGroupe from "../buttons/ButtonFormGroupe"
+import ButtonCardGroupe from "../buttons/ButtonCardGroupe"
 import { FormContext } from "../../context/FormContext"
 import { checkInterventionValid } from "../../context/utils"
 
@@ -35,6 +35,7 @@ const TacheCardForm = (props) => {
 
   return (
     <div className={`tache-card ${valide}`}>
+    <label > Tache:
       <SelectInput
         name="tacheChantier"
         value={props.tacheChantier?.tache}
@@ -42,8 +43,10 @@ const TacheCardForm = (props) => {
         onChange={changeHandler}
         options={props.taches}
       />
+    </label>
       {props.tacheChantier?
       <div className="tache-card-subcontent">
+    <label > Main d'Oeuvre:
         <SelectInput
           name="salarie"
           value={props.salarie}
@@ -52,7 +55,9 @@ const TacheCardForm = (props) => {
           onChange={changeHandler}
           options={form.salarie}
         />
+    </label> 
         <div className="tache-card-quantite">
+    <label >Durée:
           <DurationInput
             name="duree"
             value={props.duree}
@@ -60,6 +65,8 @@ const TacheCardForm = (props) => {
             onChange={changeHandler}
             addonAfter='h'
           />
+    </label>
+    <label >Quantite:
           <NumberInput
             name="quantite"
             value={props.quantite}
@@ -67,17 +74,18 @@ const TacheCardForm = (props) => {
             onChange={changeHandler}
             addonAfter={props.tacheChantier.tache?.unite?.nom}
           />
+    </label>
         </div>
       </div>
       :null}
-      <ButtonFormGroupe>
+      <ButtonCardGroupe>
         <DeleteButton onClick={deleteIntervention} />
         {props.valide ? <div/> : (
           <CheckButton
             onClick={() => changeHandler({ value: true, name: "valide" }, props._id)}
           />
         )}
-      </ButtonFormGroupe>
+      </ButtonCardGroupe>
     </div>
   )
 }

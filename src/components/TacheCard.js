@@ -13,10 +13,7 @@ const TacheCard = (props) => {
           ))}
         </ul>
         <div className="tache-card-number">
-          <p>{props.duree}(h)</p>
-          <p>
-            {props.quantite} {props.tacheChantier?.tache.unite.nom}
-          </p>
+          <p>{`${props.quantite} ${props.tacheChantier?.tache.unite.nom} en ${props.duree}h`}</p>
         </div>
       </div>
     </div>

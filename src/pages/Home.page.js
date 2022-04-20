@@ -10,6 +10,7 @@ import { BiTimeFive } from 'react-icons/bi';
 import { FiLogOut } from 'react-icons/fi';
 import { LoadingContext } from "../context/LoadingContext";
 import { AuthContext } from '../context/AuthContext'
+import LogoutButton from "../components/buttons/LogoutButton";
 
 
 const Home = () => {
@@ -26,11 +27,11 @@ const Home = () => {
         <HomeButton onClick={() => navigate("/planning")} ><BsFillCalendarDateFill/>{"Planning"}<div/></HomeButton>
         <HomeButton onClick={() => navigate("/chantiers")} ><IoIosConstruct/>{"Chantiers"}<div/></HomeButton>
         <HomeButton onClick={() => navigate("/photo")} ><MdPhotoCamera/>{"Photos"}<div/></HomeButton>
-        <HomeButton onClick={() => {
+        <LogoutButton onClick={() => {
           setLoading(true)
           logOutUser()
           setLoading(false)
-        }} ><FiLogOut/>{"Logout"}<div/></HomeButton>
+        }} ><FiLogOut/>{"Déconnexion"}<div/></LogoutButton>
       </div>
     </>
   )

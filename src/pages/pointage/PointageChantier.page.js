@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom"
 import SubmitButton from "../../components/buttons/SubmitButton"
 import { FormContext } from "../../context/FormContext"
 import PointageChantierMoForm from "../../components/forms/PointageChantierMoForm"
-import FormLayout from "../../components/forms/FormLayout"
 import ReturnButton from "../../components/buttons/ReturnButton"
-import ButtonFormGroupe from "../../components/buttons/ButtonFormGroupe"
+import ButtonFoorterGroupe from "../../components/buttons/ButtonFoorterGroupe"
 import { message } from "antd"
 
 const PointageChantier = () => {
@@ -37,13 +36,13 @@ const PointageChantier = () => {
   }
 
   return (
-    <FormLayout>
+    <>
       <PointageChantierMoForm />
-      <ButtonFormGroupe>
+      <ButtonFoorterGroupe>
         <ReturnButton onClick={handleReturn} />
         <SubmitButton onClick={handleSubmit} />
-      </ButtonFormGroupe>
-    </FormLayout>
+      </ButtonFoorterGroupe>
+    </>
   )
 }
 

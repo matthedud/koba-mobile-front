@@ -7,9 +7,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 90vh;
   padding: 0rem 2rem;
-  color: rgb(74, 74, 74);
+  color: rgb(12, 12, 96);
+}
+h1{
+  color: rgb(12, 12, 96);
 }
 
 .App-logo {
