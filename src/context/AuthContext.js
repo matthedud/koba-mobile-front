@@ -2,7 +2,10 @@ import { useState, useEffect, createContext } from 'react'
 import { useLocation } from "react-router-dom"
 import axios from 'axios'
 
-const API_URL = 'http://localhost:5005/api'
+
+
+const API_URL = process.env.API_URL 
+// 'http://localhost:5005/api'
 
 
 const AuthContext = createContext()
