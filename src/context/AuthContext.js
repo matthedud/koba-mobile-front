@@ -1,12 +1,13 @@
-import { useState, useEffect, createContext } from 'react'
+import { useState, useEffect, createContext } from "react"
 import { useLocation } from "react-router-dom"
-import axios from 'axios'
+import axios from "axios"
 
-
-
-const API_URL = process.env.API_URL 
-// 'http://localhost:5005/api'
-
+const API_URL =
+  !process.env.NODE_ENV || process.env.NODE_ENV === "development"
+    ? "http://localhost:5005/api"
+    : "https://koba-mobile-back.herokuapp.com"
+    
+  // process.env.REACT_APP_API_URL
 
 const AuthContext = createContext()
 
@@ -15,7 +16,7 @@ function AuthProviderWrapper(props) {
   const [isLoading, setIsLoading] = useState(true)
   const [isAdmin, setIsAdmin] = useState(true)
   const [user, setUser] = useState(null)
-  
+
   const location = useLocation()
 
   useEffect(() => {
@@ -24,26 +25,25 @@ function AuthProviderWrapper(props) {
   }, [location])
 
   const storeToken = (token) => {
-    localStorage.setItem('authToken', token)
+    localStorage.setItem("authToken", token)
   }
   const removeToken = () => {
     // Upon logout, remove the token from the localStorage
-    localStorage.removeItem('authToken')
+    localStorage.removeItem("authToken")
   }
 
-  const getRequest = url => {
-    const storedToken = localStorage.getItem('authToken')
+  const getRequest = (url) => {
+    const storedToken = localStorage.getItem("authToken")
     if (storedToken) {
-       return axios
-        .get(`${API_URL}${url}`, {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        })
-      }
+      return axios.get(`${API_URL}${url}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+    }
   }
 
   const authenticateUser = () => {
     // Get the stored token from the localStorage
-    const storedToken = localStorage.getItem('authToken')
+    const storedToken = localStorage.getItem("authToken")
 
     // If the token exists in the localStorage
     if (storedToken) {
@@ -53,7 +53,7 @@ function AuthProviderWrapper(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          console.log('USER IS LOGGED IN!')
+          console.log("USER IS LOGGED IN!")
 
           // If the server verifies that JWT is valid
           const user = response.data
@@ -66,7 +66,7 @@ function AuthProviderWrapper(props) {
           setUser(user)
         })
         .catch((error) => {
-          console.log('USER IS LOGGED OUT!')
+          console.log("USER IS LOGGED OUT!")
           // If the server sends an error response (invalid token)
           // Update state variables
           setIsLoggedIn(false)
