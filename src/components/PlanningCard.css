@@ -1,0 +1,17 @@
+.plan-card-wrap{
+    min-width: 80%;
+    background-color: #dedeed;
+    border-radius: 5px;
+    color: black;
+    margin: 0 auto;
+    margin-bottom: 2px;
+}
+
+.plan-card-wrap h2{
+    font-size: 1em;
+}
+
+.plan-card-icons{
+    justify-content: space-around;
+    display:flex;
+}
