@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "koba-mobile",
     "public": "build",
     "ignore": [
       "firebase.json",
