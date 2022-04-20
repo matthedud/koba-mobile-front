@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom"
 import ButtonComp from "../buttons/ButtonComp"
 import TacheCardForm from "./TacheCardForm"
 import SalarieHeureCompteur from "../inputs/SalarieHeureCompteur"
-import FormCard from "../FormCard"
+import Card from "../Card"
 
 let counter = 0
 
@@ -100,9 +100,9 @@ const PointageTacheForm = (props) => {
           ))
         : null}
       {form?.intervention ? (
-        <FormCard>
+        <Card>
           <SalarieHeureCompteur />
-        </FormCard>
+        </Card>
       ) : null}
     </>
   )

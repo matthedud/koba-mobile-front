@@ -17,8 +17,8 @@ const ChantierCardList = (props) => {
     <div className="chantier-card-list">
       <h3>{props.nom}</h3>
       <div className="element-line">
-      <a className="adresse-link" href={googleLink} target="_blank" rel="noopener noreferrer">
-        <div className="element-item">{props.adresse.ville}<FaMapMarkedAlt/></div>
+      <a className="element-item" href={googleLink} target="_blank" rel="noopener noreferrer">
+        {props.adresse.ville}<FaMapMarkedAlt/>
         </a>
         <div className="element-item" onClick={onCellClicked}>DQE<AiOutlineUnorderedList/></div>
         <div className="element-item" onClick={()=>{}}>Planning<BsFillCalendarDateFill/></div>

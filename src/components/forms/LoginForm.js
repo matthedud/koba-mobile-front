@@ -1,17 +1,18 @@
-import { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { AuthContext } from '../../context/AuthContext'
-import './LoginForm.css'
-import TextInput from '../inputs/TextInput'
-import PasswordInput from '../inputs/PasswordInput'
-import ButtonComp from '../buttons/ButtonComp'
+import { useContext, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import { AuthContext } from "../../context/AuthContext"
+import "./LoginForm.css"
+import TextInput from "../inputs/TextInput"
+import PasswordInput from "../inputs/PasswordInput"
+import ButtonComp from "../buttons/ButtonComp"
+import Card from "../Card"
 
 function LoginForm(props) {
-  const { storeToken, authenticateUser, API_URL} = useContext(AuthContext)
+  const { storeToken, authenticateUser, API_URL } = useContext(AuthContext)
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
   const [errorMessage, setErrorMessage] = useState(undefined)
 
   const navigate = useNavigate()
@@ -30,8 +31,8 @@ function LoginForm(props) {
     axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
-        console.log('JWT RETURNED', response.data)
-        
+        console.log("JWT RETURNED", response.data)
+
         storeToken(response.data.authToken)
         authenticateUser()
 
@@ -46,22 +47,16 @@ function LoginForm(props) {
 
   return (
     <div className="LoginPage">
-      <h1>Connection</h1>
-
       <form onSubmit={handleLoginSubmit}>
-        <label>Identifiant:</label>
-        <TextInput
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleUsername}
-        />
+        <label>
+          Identifiant:
+          <TextInput type="text" name="username" value={username} onChange={handleUsername} />
+        </label>
 
-        <label>Mot de Passe:</label>
-        <PasswordInput
-          value={password}
-          onChange={handlePassword}
-        />
+        <label>
+          Mot de Passe:
+          <PasswordInput value={password} onChange={handlePassword} />
+        </label>
 
         <ButtonComp type="submit">Connecter</ButtonComp>
       </form>
