@@ -4,7 +4,7 @@ import { LoadingContext } from "../../context/LoadingContext"
 import SelectInput from "../inputs/SelectInput"
 import { AuthContext } from "../../context/AuthContext"
 import { message } from "antd"
-import FormCard from "../FormCard"
+import Card from "../Card"
 
 const PointageChantierMoForm = () => {
   const { form, onChange } = useContext(FormContext)
@@ -36,7 +36,7 @@ const PointageChantierMoForm = () => {
   return (
     <>
     <h1>Choix Chantier et Equipe</h1>
-    <FormCard>
+    <Card>
       <label htmlFor="chantier">
         Chantier:
         <SelectInput
@@ -58,7 +58,7 @@ const PointageChantierMoForm = () => {
           options={salaries}
         />
       </label>
-    </FormCard></>
+    </Card></>
   )
 }
 
