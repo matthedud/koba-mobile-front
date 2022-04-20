@@ -6,12 +6,15 @@ import ReturnButton from '../../components/buttons/ReturnButton'
 import ButtonFormGroupe from '../../components/buttons/ButtonFormGroupe'
 import FormLayout from '../../components/forms/FormLayout'
 import { FormContext } from '../../context/FormContext'
+import { message } from 'antd'
 
 const PointageValidation = () => {
-  const { form } = useContext(FormContext)
+  const { form, setForm} = useContext(FormContext)
   const navigate = useNavigate()
 
   const handleSubmit= ()=>{
+    setForm({})
+    message.info('pointage sauvegardé')
     navigate('/')
   }
 

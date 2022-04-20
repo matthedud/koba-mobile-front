@@ -1,73 +1,117 @@
-import React, { useRef } from "react"
-import ButtonComp from "../components/buttons/ButtonComp"
+import { Upload, message } from "antd"
+import React, { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import ButtonFormGroupe from "../components/buttons/ButtonFormGroupe"
+import ReturnButton from "../components/buttons/ReturnButton"
+import SubmitButton from "../components/buttons/SubmitButton"
+import Card from "../components/Card"
+import SelectInput from "../components/inputs/SelectInput"
+import TextInput from "../components/inputs/TextInput"
+import { AuthContext } from "../context/AuthContext"
+import { FormContext } from "../context/FormContext"
+import { LoadingContext } from "../context/LoadingContext"
 
 const PhotoTake = () => {
-  const videoRef = useRef()
-  const cavasRef = useRef()
-  const photoRef = useRef()
-  let height = 500
-  let width = 400
+  const navigate = useNavigate()
+  const { form, onChange, setForm } = useContext(FormContext)
+  const { getRequest } = useContext(AuthContext)
+  const { setLoading } = useContext(LoadingContext)
+  const [chantiers, setChantiers] = useState([])
+  const [tacheChantier, setTacheChantier] = useState([])
 
-  const turnCamera = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { optional: [{ facingMode: "environment" }] },
-    })
-    const videoTracks = stream.getVideoTracks()
-    const track = videoTracks[0]
-    alert(`Getting video from: ${track.label}`)
-    videoRef.current.srcObject = stream
-    console.log({ videoRef })
-    height = videoRef.current.videoHeight
-    width = videoRef.current.videoWidth
-    console.log({ height, width })
-    setTimeout(() => {
-      track.stop()
-    }, 10 * 1000)
+  useEffect(() => {
+    const getChantierSalarier = async () => {
+      setLoading(true)
+      try {
+        const chantierData = await getRequest(`/chantiers`)
+        if (chantierData?.data) setChantiers(chantierData.data)
+      } catch (err) {
+        message.error("erreur de connexion")
+        console.log({ err })
+      }
+      setLoading(false)
+    }
+    getChantierSalarier()
+  }, [])
+
+
+  useEffect(() => {
+    onChange({value:null, name:'tacheChantier'})
+    if(form.chantier){
+      const getTachanChantier = async () => {
+        setLoading(true)
+        try {
+          const tacheChantierData = await getRequest(`/tacheChantier/${form.chantier._id}/`)
+          if (tacheChantierData?.data) {
+            const tacheList = tacheChantierData?.data.map((el) => ({
+              ...el,
+              nom: el.tache.nom,
+            }))
+            setTacheChantier(tacheList)
+          }
+        } catch (err) {
+          message.error("erreur de connexion")
+          console.log({ err })
+        }
+        setLoading(false)
+      }
+      getTachanChantier()
+    }
+  }, [form.chantier])
+
+
+  const handleSubmit = () => {
+    setForm({})
+    message.info('photo sauvegardée')
+    navigate("/")
   }
-  function clearphoto() {
-    var context = cavasRef.current.getContext("2d")
-    context.fillStyle = "#AAA"
-    context.fillRect(0, 0, cavasRef.current.width, cavasRef.current.height)
 
-    var data = cavasRef.current.toDataURL("image/png")
-    photoRef.current.setAttribute("src", data)
+  const handleReturn = () => {
+    navigate("/")
   }
 
-  function takepicture() {
-    var context = cavasRef.current.getContext("2d")
-    // if (width && height) {
-    cavasRef.current.width = videoRef.current.videoWidth
-    cavasRef.current.height = videoRef.current.videoHeight
-    context.drawImage(
-      videoRef.current,
-      0,
-      0,
-      videoRef.current.videoWidth,
-      videoRef.current.videoHeight
-    )
-
-    var data = cavasRef.current.toDataURL("image/png")
-    photoRef.current.setAttribute("src", data)
-    // } else {
-    //   clearphoto();
-    // }
-  }
 
   return (
     <div>
-      Take Photo
-      <input type="file" accept="image/x-png,image/jpeg,image/gif" />
-      {/* <video ref={videoRef} autoPlay></video>
-      <canvas ref={cavasRef} id="canvas">
-        <div className="output">
-          <img ref={photoRef} id="photo" alt="The screen capture will appear in this box." />
-        </div>
-      </canvas>
+      <Card>
+        <label htmlFor="chantier">
+          Chantier:
+          <SelectInput
+            name="chantier"
+            value={form.chantier}
+            placeholder="Chantier"
+            onChange={onChange}
+            options={chantiers}
+          />
+        </label>
+        {form.chantier ? (
+          <label htmlFor="poste">
+            Poste:
+            <SelectInput
+              name="poste"
+              value={form.poste}
+              placeholder="poste"
+              onChange={onChange}
+              options={form.chantier?.poste}
+              isMulti
+            />
+          </label>
+        ) : null}
+        <input type="file" accept="image/x-png,image/jpeg,image/gif" />
+        <label htmlFor="salarie">
+          Commentaire:
+          <TextInput
+          name="commentaire"
+          value={form.commentaire}
+          placeholder="Commentaire"
+          onChange={onChange}
+        />
+        </label>
+      </Card>
       <ButtonFormGroupe>
-        <ButtonComp onClick={turnCamera}>Show my face</ButtonComp>
-        <ButtonComp onClick={takepicture}>take Photo</ButtonComp>
-      </ButtonFormGroupe> */}
+        <ReturnButton onClick={handleReturn} />
+        <SubmitButton onClick={handleSubmit} />
+      </ButtonFormGroupe>
     </div>
   )
 }
