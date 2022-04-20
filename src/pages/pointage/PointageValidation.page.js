@@ -3,10 +3,10 @@ import {useNavigate} from 'react-router-dom'
 import SubmitButton from '../../components/buttons/SubmitButton'
 import PointageDetail from '../../components/PointageDetail'
 import ReturnButton from '../../components/buttons/ReturnButton'
-import ButtonFormGroupe from '../../components/buttons/ButtonFormGroupe'
 import FormLayout from '../../components/forms/FormLayout'
 import { FormContext } from '../../context/FormContext'
 import { message } from 'antd'
+import ButtonFoorterGroupe from '../../components/buttons/ButtonFoorterGroupe'
 
 const PointageValidation = () => {
   const { form, setForm} = useContext(FormContext)
@@ -23,13 +23,13 @@ const PointageValidation = () => {
   }
   console.log({form});
   return (
-    <FormLayout>
+    <>
       <PointageDetail {...form}/>
-      <ButtonFormGroupe>
+      <ButtonFoorterGroupe>
         <ReturnButton onClick={handleReturn}/>
         <SubmitButton onClick={handleSubmit}/>
-      </ButtonFormGroupe>
-    </FormLayout>
+      </ButtonFoorterGroupe>
+    </>
   )
 }
 

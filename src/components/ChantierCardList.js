@@ -1,10 +1,10 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import "./ChantierCardList.css"
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { BsFillCalendarDateFill } from 'react-icons/bs'
 import { FaMapMarkedAlt } from 'react-icons/fa'
 import { goolgleMapFormat } from "../context/utils"
+import Card from "./Card"
 
 const ChantierCardList = (props) => {
     const navigate = useNavigate()
@@ -14,7 +14,7 @@ const ChantierCardList = (props) => {
   const {googleLink} = goolgleMapFormat(props.adresse)
 
   return (
-    <div className="chantier-card-list">
+    <Card>
       <h3>{props.nom}</h3>
       <div className="element-line">
       <a className="element-item" href={googleLink} target="_blank" rel="noopener noreferrer">
@@ -23,7 +23,7 @@ const ChantierCardList = (props) => {
         <div className="element-item" onClick={onCellClicked}>DQE<AiOutlineUnorderedList/></div>
         <div className="element-item" onClick={()=>{}}>Planning<BsFillCalendarDateFill/></div>
       </div>
-    </div>
+    </Card>
   )
 }
 

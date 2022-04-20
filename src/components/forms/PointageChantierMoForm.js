@@ -35,7 +35,7 @@ const PointageChantierMoForm = () => {
 
   return (
     <>
-    <h1> </h1>
+    <h1>Choix Chantier</h1>
     <Card>
       <label htmlFor="chantier"> 
         Chantier:
@@ -45,6 +45,7 @@ const PointageChantierMoForm = () => {
           placeholder="Chantier"
           onChange={onChange}
           options={chantiers}
+          zeroOK
         />
       </label>
       <label htmlFor="salarie">

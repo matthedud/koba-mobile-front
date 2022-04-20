@@ -9,10 +9,14 @@
     min-width: 300px;
 }
 .tache-card.true{
-    border: 1px solid rgb(75, 246, 75);
-    box-shadow: 0px 0px 7px 1px rgb(67, 184, 67);
+    border: 1px solid rgb(186, 204, 255);
+    box-shadow: 1px 1px 3px rgb(104, 147, 198);
 }
-
+.tache-card label{
+    color: inherit;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
 .tache-card-subcontent{
     display: flex;
     flex-direction: row;

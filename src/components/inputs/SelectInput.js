@@ -1,24 +1,46 @@
 import React from "react"
 import Select from "react-select"
-import './SelectInput.css'
+import "./SelectInput.css"
 import "./InputComp.css"
 
 const SelectInput = (props) => {
+  const { onChange, name, options, placeholder, isMulti } = props
 
-  const changeHandler =  (value) =>{
-    props.onChange({value, name:props.name})
+  const changeHandler = (value) => {
+    onChange({ value, name })
   }
 
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      border: '1px solid rgb(0, 88, 164)',
+      borderRadius: 'none',
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: "rgb(12, 12, 96)",
+    }),
+    multiValueLabel: (provided, state) => ({
+      ...provided,
+      color: "rgb(12, 12, 96)",
+    }),
+    multiValue: (provided, state) => ({
+      ...provided,
+      color: "rgb(12, 12, 96)",
+      backgroundColor:'rgb(198, 228, 255)'
+    }),
+  }
   return (
     <Select
       value={props.value}
       onChange={changeHandler}
-      placeholder={props.placeholder}
-      options={props.options}
+      placeholder={placeholder}
+      styles={customStyles}
+      options={options}
       getOptionLabel={(option) => option.nom}
       getOptionValue={(option) => option._id}
-      className={`select ${props.value?'':"invalide"}`}
-      isMulti={props.isMulti}
+      className={`select ${props.invalide ? "invalide" : ""}`}
+      isMulti={isMulti}
     />
   )
 }

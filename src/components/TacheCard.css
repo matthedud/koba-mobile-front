@@ -5,8 +5,9 @@
     padding: 0.5rem;
     width: 100%;
     min-width: 300px;
-    border: 1px solid rgb(229, 229, 229);
-    box-shadow: 1px 1px 2px;
+    border: 1px solid rgb(186, 204, 255);
+    box-shadow: 1px 1px 3px rgb(104, 147, 198);
+    color: rgb(12, 12, 96);
 }
 
 .tache-card-subcontent ul{
@@ -18,6 +19,7 @@
 .tache-card-valid h3{
     font-weight: 600;
     text-align: center;
+    color: rgb(12, 12, 96);
 }
 
 

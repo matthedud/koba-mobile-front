@@ -2,12 +2,11 @@ import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import SubmitButton from "../../components/buttons/SubmitButton"
 import PointageHoraireForm from "../../components/forms/PointageHoraireForm"
-import FormLayout from "../../components/forms/FormLayout"
 import ReturnButton from "../../components/buttons/ReturnButton"
-import ButtonFormGroupe from "../../components/buttons/ButtonFormGroupe"
 import { FormContext } from "../../context/FormContext"
 import { message } from "antd"
 import { getHoursFromString, makeStringFromNumHours } from "../../context/utils"
+import ButtonFoorterGroupe from "../../components/buttons/ButtonFoorterGroupe"
 
 const PointageHoraire = () => {
   const { form, setForm } = useContext(FormContext)
@@ -40,13 +39,13 @@ const PointageHoraire = () => {
     navigate("/pointage")
   }
   return (
-    <FormLayout>
+    <>
       <PointageHoraireForm />
-      <ButtonFormGroupe>
+      <ButtonFoorterGroupe>
         <ReturnButton onClick={handleReturn} />
         <SubmitButton onClick={handleSubmit} />
-      </ButtonFormGroupe>
-    </FormLayout>
+      </ButtonFoorterGroupe>
+    </>
   )
 }
 
