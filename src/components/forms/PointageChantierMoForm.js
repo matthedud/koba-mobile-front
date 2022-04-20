@@ -35,9 +35,9 @@ const PointageChantierMoForm = () => {
 
   return (
     <>
-    <h1>Choix Chantier et Equipe</h1>
+    <h1> </h1>
     <Card>
-      <label htmlFor="chantier">
+      <label htmlFor="chantier"> 
         Chantier:
         <SelectInput
           name="chantier"

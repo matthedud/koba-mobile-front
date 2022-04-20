@@ -7,10 +7,12 @@ import CheckButton from "../buttons/CheckButton"
 import DeleteButton from "../buttons/DeleteButton"
 import ButtonFormGroupe from "../buttons/ButtonFormGroupe"
 import { FormContext } from "../../context/FormContext"
+import { checkInterventionValid } from "../../context/utils"
 
 const TacheCardForm = (props) => {
   const { form, onChange, setForm } = useContext(FormContext)
 
+  const valide = checkInterventionValid(props, true)
 
   const changeHandler = (event) => {
     const { value, name } = event.target || event
@@ -32,7 +34,7 @@ const TacheCardForm = (props) => {
   }
 
   return (
-    <div className={`tache-card ${props.valide}`}>
+    <div className={`tache-card ${valide}`}>
       <SelectInput
         name="tacheChantier"
         value={props.tacheChantier?.tache}

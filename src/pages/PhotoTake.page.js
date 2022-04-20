@@ -17,34 +17,38 @@ const PhotoTake = () => {
     const track = videoTracks[0]
     alert(`Getting video from: ${track.label}`)
     videoRef.current.srcObject = stream
-    console.log({videoRef});
+    console.log({ videoRef })
     height = videoRef.current.videoHeight
     width = videoRef.current.videoWidth
-    console.log({height, width});
+    console.log({ height, width })
     setTimeout(() => {
       track.stop()
     }, 10 * 1000)
   }
   function clearphoto() {
-    var context = cavasRef.current.getContext('2d');
-    context.fillStyle = "#AAA";
-    context.fillRect(0, 0, cavasRef.current.width, cavasRef.current.height);
+    var context = cavasRef.current.getContext("2d")
+    context.fillStyle = "#AAA"
+    context.fillRect(0, 0, cavasRef.current.width, cavasRef.current.height)
 
-    var data = cavasRef.current.toDataURL('image/png');
-    photoRef.current.setAttribute('src', data);
+    var data = cavasRef.current.toDataURL("image/png")
+    photoRef.current.setAttribute("src", data)
   }
 
   function takepicture() {
-    var context = cavasRef.current.getContext('2d');
+    var context = cavasRef.current.getContext("2d")
     // if (width && height) {
-      console.log('videoRef.current.videoHeight', videoRef.current.videoHeight);
-      console.log('videoRef.current.videoWidth', videoRef.current.videoWidth);
-      cavasRef.current.width =  videoRef.current.videoWidth;
-      cavasRef.current.height = videoRef.current.videoHeight;
-      context.drawImage(videoRef.current, 0, 0, videoRef.current.videoWidth, videoRef.current.videoHeight);
-    
-      var data = cavasRef.current.toDataURL('image/png');
-      photoRef.current.setAttribute('src', data);
+    cavasRef.current.width = videoRef.current.videoWidth
+    cavasRef.current.height = videoRef.current.videoHeight
+    context.drawImage(
+      videoRef.current,
+      0,
+      0,
+      videoRef.current.videoWidth,
+      videoRef.current.videoHeight
+    )
+
+    var data = cavasRef.current.toDataURL("image/png")
+    photoRef.current.setAttribute("src", data)
     // } else {
     //   clearphoto();
     // }
@@ -52,9 +56,9 @@ const PhotoTake = () => {
 
   return (
     <div>
-      PhotoTake
+      Take Photo
       <input type="file" accept="image/x-png,image/jpeg,image/gif" />
-      <video ref={videoRef} autoPlay></video>
+      {/* <video ref={videoRef} autoPlay></video>
       <canvas ref={cavasRef} id="canvas">
         <div className="output">
           <img ref={photoRef} id="photo" alt="The screen capture will appear in this box." />
@@ -63,7 +67,7 @@ const PhotoTake = () => {
       <ButtonFormGroupe>
         <ButtonComp onClick={turnCamera}>Show my face</ButtonComp>
         <ButtonComp onClick={takepicture}>take Photo</ButtonComp>
-      </ButtonFormGroupe>
+      </ButtonFormGroupe> */}
     </div>
   )
 }

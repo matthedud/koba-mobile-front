@@ -35,6 +35,7 @@ const PointageTacheForm = (props) => {
           const tacheChantierData = await getRequest(
             `/tachesPrevu/${form.chantier._id}/${formatedDate}`
           )
+          console.log({tacheChantierData});
           if (tacheChantierData?.data) {
             const intervention = tacheChantierData?.data.map((el) => {
               const quantite = Number(
@@ -82,6 +83,7 @@ const PointageTacheForm = (props) => {
       tacheChantier: null,
       salarie: form.salarie,
       duree,
+      valide: true,
       quantite: 0,
     }
     setForm({ ...form, intervention: [newIntervention, ...form.intervention] })
