@@ -1,12 +1,21 @@
 import React from "react"
-import Input from "./InputComp"
+import { InputNumber } from "antd"
+import  "./NumberInput.css"
+import "./InputComp.css"
 
-const NumberInput = () => {
+
+const NumberInput = props => {
+
+  const changeHandler =  (event) =>{
+    const value =parseFloat(event)
+    if(!isNaN(value)) props.onChange({value, name:props.name})
+  }
   return (
-    <Input
-      className="number-input"
-      type="number"
+    <InputNumber
       {...props}
+      className={`number-input ${props.value?'':"invalide"}`}
+      type="number"
+      onChange={changeHandler}
     />
   )
 }

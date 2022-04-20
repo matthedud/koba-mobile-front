@@ -1,44 +1,70 @@
-import { message } from "antd"
 import React, { useContext, useEffect, useState } from "react"
+import moment from "moment"
+import { message } from "antd"
 import { AuthContext } from "../../context/AuthContext"
 import { FormContext } from "../../context/FormContext"
 import { LoadingContext } from "../../context/LoadingContext"
-import InterventionGrid from "../ag-grid/Grids/InterventionGrid"
-import {dateSaveFormat} from '../Format/DateFormat'
-import moment from 'moment'
-import HomeButton from "../buttons/HomeButton"
-// import ListInterventionForm from "./ListInterventionForm"
+import { dateSaveFormat } from "../Format/DateFormat"
+import { AiOutlinePlusCircle } from "react-icons/ai"
+import { useNavigate } from "react-router-dom"
+import ButtonComp from "../buttons/ButtonComp"
+import TacheCardForm from "./TacheCardForm"
+import SalarieHeureCompteur from "../inputs/SalarieHeureCompteur"
+import FormCard from "../FormCard"
+
+let counter = 0
 
 const PointageTacheForm = (props) => {
   const [tacheChantier, setTacheChantier] = useState()
-  const [salaries, setSalaries] = useState()
-  const { form, setForm, onChange } = useContext(FormContext)
+  const { form, setForm } = useContext(FormContext)
   const { setLoading } = useContext(LoadingContext)
   const { getRequest } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
+    if (!form.chantier) {
+      message.error("pointage erroné")
+      navigate("/pointage")
+    }
     const getChantier = async () => {
       setLoading(true)
       try {
         if (!form.intervention) {
           const date = new Date()
           const formatedDate = moment(date).format(dateSaveFormat)
-          const interventionData = await getRequest(`/tachesPrevu/${form.chantier._id}/${formatedDate}`)
-          console.log({interventionData});
-          if (interventionData?.data) setForm({...form, intervention:interventionData?.data})
-          else setForm({...form, intervention:[]})
-        }
-        const salarieData = await getRequest(`/salaries`)
-        if (salarieData?.data) {
-          const salarieList = salarieData.data.map((el) => ({
-            ...el,
-            nom: `${el.contact.nom} ${el.contact.prenom}`,
-          }))
-          setSalaries(salarieList)
+          const tacheChantierData = await getRequest(
+            `/tachesPrevu/${form.chantier._id}/${formatedDate}`
+          )
+          if (tacheChantierData?.data) {
+            const intervention = tacheChantierData?.data.map((el) => {
+              const quantite = Number(
+                (
+                  (form.dureeHeure * el.rendementEquipe * form.salarie.length) /
+                  el.equipe.length
+                ).toFixed(3)
+              )
+              counter++
+              return {
+                _id: "N" + counter,
+                tacheChantier: { ...el },
+                nom: el.tache.nom,
+                duree: form.duree,
+                quantite,
+                valide: false,
+                salarie: form.salarie,
+              }
+            })
+            setForm({ ...form, intervention })
+          } else setForm({ ...form, intervention: [] })
         }
         const tacheChantierData = await getRequest(`/tacheChantier/${form.chantier._id}/`)
-        console.log({tacheChantierData});
-        if (tacheChantierData?.data) setTacheChantier(tacheChantierData?.data)
+        if (tacheChantierData?.data) {
+          const tacheList = tacheChantierData?.data.map((el) => ({
+            ...el,
+            nom: el.tache.nom,
+          }))
+          setTacheChantier(tacheList)
+        }
       } catch (err) {
         message.error("erreur de connexion")
         console.log({ err })
@@ -48,30 +74,36 @@ const PointageTacheForm = (props) => {
     getChantier()
   }, [])
 
-  const addTache = () =>{
-    const duree = form.heureFin - form.heureDebut
+  const addTache = () => {
+    const duree = form.duree
+    counter++
     const newIntervention = {
-      _id:'N'+form.intervention.length,
-      tacheChantier:null,
-      salarie:form.salarie,
+      _id: "N" + counter,
+      tacheChantier: null,
+      salarie: form.salarie,
       duree,
-      quantite:0
+      quantite: 0,
     }
-    setForm({...form, intervention:[...form.intervention, newIntervention]})
+    setForm({ ...form, intervention: [newIntervention, ...form.intervention] })
   }
+
+  const refreshHeureTravailler = () => {}
 
   return (
     <>
-      <HomeButton onClick={addTache}>+ Tache</HomeButton>
-      <label htmlFor="Tache">Taches:</label>
-      {/* <ListInterventionForm salaries={salaries} taches={tacheChantier} /> */}
-      <InterventionGrid
-        data={form.intervention}
-        editable={true}
-        modifHendler={onChange}
-        tacheChantier={tacheChantier}
-        salaries={salaries}
-      />
+      <ButtonComp onClick={addTache}>
+        <AiOutlinePlusCircle /> Ajouter Tache <div />
+      </ButtonComp>
+      {form?.intervention?.length > 0
+        ? form.intervention.map((intervention) => (
+            <TacheCardForm key={intervention._id} {...intervention} taches={tacheChantier} />
+          ))
+        : null}
+      {form?.intervention ? (
+        <FormCard>
+          <SalarieHeureCompteur />
+        </FormCard>
+      ) : null}
     </>
   )
 }

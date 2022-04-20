@@ -6,7 +6,7 @@ const PasswordInput = (props) => {
     <InputComp
       type="password"
       name={"password"}
-      placeholder={"password"}
+      placeholder={"Mot de passe"}
       id={"password"}
       {...props}
     />

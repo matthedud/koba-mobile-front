@@ -1,38 +1,6 @@
-import  PourcentRender from '../GridRender/PourcentRender'
-import  timeRender from '../GridRender/timeRender'
-import  BooleanRender from '../GridRender/BooleanRender'
 import  NumberRender from '../GridRender/NumberRender'
-import  MoneyRender from '../GridRender/MoneyRender'
-import  DateRender from '../GridRender/DateRender'
-import  progressRender from '../GridRender/progressRender'
-import  ListeRender from '../GridRender/ListeRender'
-
-
-
-// const KEY_ENTER = 13
-// const noMoveKey = (key) => key === KEY_ENTER
 
 const columnTypes = {
-  BooleanType: {
-    minWidth: 80,
-    maxWidth: 80,
-    flex: 1,
-    cellClass: ["table-align-center"],
-    valueFormatter: BooleanRender,
-    suppressMenu: true,
-    "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
-  },
-
-  DateType: {
-    minWidth: 100,
-    maxWidth: 200,
-    flex: 1,
-    valueFormatter: DateRender,
-    cellClass: "table-align-center",
-    cellEditor: 'CalendarInput',
-    "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
-  },
-
   GroupeType: {
     flex: 5,
     minWidth: 300,
@@ -42,18 +10,6 @@ const columnTypes = {
     autoHeight: true,
     cellClass: ["auto-height-column"],
     cellRenderer: "agGroupCellRenderer",
-    "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
-  },
-  
-  MultiType: {
-    minWidth: 200,
-    flex: 3,
-    enableRowGroup: false,
-    cellClass: "table-align-left",
-    cellRenderer: ListeRender,
-    cellEditorPopup: true,
-    cellEditorPopupPosition: 'over',
-    autoHeight: true,
     "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
   },
 
@@ -80,38 +36,7 @@ const columnTypes = {
     "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
   },
 
-  PourcentType: {
-    minWidth: 100,
-    maxWidth: 250,
-    flex: 1,
-    cellClass: "table-align-center",
-    valueFormatter: PourcentRender,
-    cellRenderer: "agAnimateShowChangeCellRenderer",
-    suppressMenu: true,
-    "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
-  },
-
-  PrixType: {
-    minWidth: 130,
-    maxWidth: 250,
-    flex: 1,
-    cellClass: "table-align-right",
-    valueFormatter: MoneyRender,
-    cellRenderer: "agAnimateShowChangeCellRenderer",
-    suppressMenu: true,
-    "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
-  },
-
-  ProgressType: {
-    minWidth: 100,
-    maxWidth: 300,
-    flex: 1,
-    cellClass: "progress-cell",
-    cellRenderer: progressRender,
-    suppressMenu: true,
-    "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
-  },
-
+  
   TextType: {
     flex: 4,
     wrapText: true,
@@ -121,22 +46,7 @@ const columnTypes = {
     cellEditor: "agLargeTextCellEditor",
     "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
   },
-  TimeType: {
-    minWidth: 100,
-    maxWidth: 250,
-    flex: 1,
-    cellClass: "table-align-center",
-    cellRenderer: timeRender,
-    suppressMenu: true,
-    "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
-  },
-
-  totalType: {
-    cellClass: ["table-align-right", "total-row"],
-    suppressMenu: true,
-    "footer-cell": (params) => params.value && params?.data?.nature === 'footer',
-  },
-
+  
   UniteType: {
     minWidth: 70,
     flex: 1,

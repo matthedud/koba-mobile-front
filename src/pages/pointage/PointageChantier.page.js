@@ -17,7 +17,8 @@ const PointageChantier = () => {
       message.error("entrer un chantier")
       return
     }
-    if (form.salarie?.length < 1) {
+    console.log('form.salarie?.length', form.salarie?.length);
+    if (!form.salarie?.length >0) {
       message.error("ajouter une persone")
       return
     }
@@ -31,6 +32,7 @@ const PointageChantier = () => {
   }
 
   const handleReturn = () => {
+    setForm({})
     navigate("/")
   }
 
