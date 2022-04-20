@@ -5,7 +5,9 @@ import axios from "axios"
 const API_URL =
   !process.env.NODE_ENV || process.env.NODE_ENV === "development"
     ? "http://localhost:5005/api"
-    : process.env.REACT_APP_API_URL
+    : "https://koba-mobile-back.herokuapp.com"
+    
+  // process.env.REACT_APP_API_URL
 
 const AuthContext = createContext()
 
