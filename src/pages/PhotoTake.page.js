@@ -1,4 +1,4 @@
-import { Upload, message } from "antd"
+import { message } from "antd"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ButtonFormGroupe from "../components/buttons/ButtonFormGroupe"
@@ -17,7 +17,6 @@ const PhotoTake = () => {
   const { getRequest } = useContext(AuthContext)
   const { setLoading } = useContext(LoadingContext)
   const [chantiers, setChantiers] = useState([])
-  const [tacheChantier, setTacheChantier] = useState([])
 
   useEffect(() => {
     const getChantierSalarier = async () => {
@@ -35,31 +34,6 @@ const PhotoTake = () => {
   }, [])
 
 
-  useEffect(() => {
-    onChange({value:null, name:'tacheChantier'})
-    if(form.chantier){
-      const getTachanChantier = async () => {
-        setLoading(true)
-        try {
-          const tacheChantierData = await getRequest(`/tacheChantier/${form.chantier._id}/`)
-          if (tacheChantierData?.data) {
-            const tacheList = tacheChantierData?.data.map((el) => ({
-              ...el,
-              nom: el.tache.nom,
-            }))
-            setTacheChantier(tacheList)
-          }
-        } catch (err) {
-          message.error("erreur de connexion")
-          console.log({ err })
-        }
-        setLoading(false)
-      }
-      getTachanChantier()
-    }
-  }, [form.chantier])
-
-
   const handleSubmit = () => {
     setForm({})
     message.info('photo sauvegardée')
@@ -67,6 +41,7 @@ const PhotoTake = () => {
   }
 
   const handleReturn = () => {
+    setForm({})
     navigate("/")
   }
 
