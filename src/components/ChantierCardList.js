@@ -22,7 +22,7 @@ const ChantierCardList = (props) => {
         </a>
         <div className="element-item" onClick={onCellClicked}>DQE<AiOutlineUnorderedList/></div>
         {/* <div className="element-item" onClick={()=>{}}>Planning<BsFillCalendarDateFill/></div> */}
-        <div className="element-item" onClick={()=>{}}>Photo<MdPhotoCamera/></div>
+        <a className="element-item" href={`photo/chantier/${props._id}`} >Photo<MdPhotoCamera/></a>
       </div>
     </Card>
   )
