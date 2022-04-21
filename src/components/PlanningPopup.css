@@ -1,4 +1,4 @@
-.plan-pop-fade{
+.plan-popup-fade{
     width:100vw;
     height:100vh;
     background-color:rgba(0, 0, 0, 0.527);
@@ -8,8 +8,48 @@
     align-items: center;
 }
 
-.plan-pop-wrap{
+.plan-popup-wrap{
     width: 80%;
     height: 80%;
     background-color: white;
+    overflow: hidden;
+}
+
+.plan-popup-wrap p{
+    margin-bottom:0;
+}
+
+.plan-popup-wrap>div{
+    min-height: calc(100% - 48px);
+}
+
+.plan-popup-wrap .chantier-card-list{
+    border: none;
+    box-shadow: none; 
+    margin: 0;
+}
+
+.plan-popup-wrap .return-button{
+    margin: 5px auto;
+    width: 96%;
+}
+ 
+.popup-salaries div{
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    padding: 0px 5px;
+    width: max-content;
+    margin: 2px auto;
+}
+
+.popup-taches div{
+    background-color: #db2e2e;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    padding: 0px 5px;
+    margin: 2px auto;
+    width: max-content;
 }

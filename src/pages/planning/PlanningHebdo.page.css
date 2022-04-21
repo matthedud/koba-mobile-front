@@ -1,0 +1,46 @@
+/* table, */
+.table-planning td {
+    border: 1px solid #ddd;
+}
+
+.table-planning {
+    height: calc(100vh - 48px);
+    width: 100vw;
+    border-collapse: separate;
+    text-align: center;
+}
+
+.week-flex{
+    display:flex;
+    align-items: baseline
+}
+
+.week-arrow{
+    margin: 0 10px;
+    font-size: 18px;
+}
+
+.table-planning td:first-child {
+    width: 74px;
+}
+
+.flex{
+    display: flex;
+    margin: 0 auto;
+}
+
+.no-bullet{
+    list-style-type: none; 
+    text-align: left;
+    padding : 0;
+    margin : 0;
+    display:flex;
+    flex-direction: column;
+}
+
+.td-flex{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+}

@@ -6,7 +6,7 @@ import "./PlanningCard.css"
 const PlanningCard = (props) => {
 
   function cardClick(){
-    props.setchantierTarget([props.chantierID, props.jour])
+    props.setchantierTarget([props.chantier, props.jour])
     props.toggleVisible()
   }
 
