@@ -13,7 +13,7 @@ const NumberInput = (props) => {
   return (
     <InputNumber
       {...props}
-      className={`number-input ${invalide && !value && !zeroOK ? "invalide" : ""}`}
+      className={`number-input-class ${invalide && !value && !zeroOK ? "invalide" : ""}`}
       type="number"
       onChange={changeHandler}
     />

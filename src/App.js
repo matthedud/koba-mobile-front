@@ -11,7 +11,8 @@ import PlanningRealise from "./pages/planning/PlanningRealise.page"
 import PlanningHebdo from "./pages/planning/PlanningHebdo.page"
 import PlanningHome from "./pages/planning/PlanningHome.page"
 import PhotoTake from "./pages/PhotoTake.page"
-import PointageHoraire from "./pages/pointage/PointageHoraire.page"
+import PointageHoraireChantier from "./pages/pointage/PointageHoraireChantier.page"
+import PointageHoraireSalarie from "./pages/pointage/PointageHoraireSalarie.page"
 import PointageChantier from "./pages/pointage/PointageChantier.page"
 import PointageTache from "./pages/pointage/PointageTache.page"
 import PointageValidation from "./pages/pointage/PointageValidation.page"
@@ -34,7 +35,8 @@ function App() {
         ) : (
           <>
             <Route path="/pointage/*">
-              <Route path="pointage-horaire" element={<PointageHoraire />} />
+              <Route path="pointage-horaire-salarie" element={<PointageHoraireSalarie />} />
+              <Route path="pointage-horaire-chantier" element={<PointageHoraireChantier />} />
               <Route path="pointage-tache" element={<PointageTache />} />
               <Route path="pointage-validation" element={<PointageValidation />} />
               <Route index element={<PointageChantier />} />

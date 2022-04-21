@@ -3,5 +3,9 @@
     border: 1px solid rgb(186, 204, 255) !important;
     border-radius: none !important;
     color: rgb(12, 12, 96) !important;
+}
 
+.ant-picker{
+    border: none;
+    border-radius: none !important;
 }

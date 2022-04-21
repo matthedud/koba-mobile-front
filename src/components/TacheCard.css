@@ -9,24 +9,52 @@
     box-shadow: 1px 1px 3px rgb(104, 147, 198);
     color: rgb(12, 12, 96);
 }
-
-.tache-card-subcontent ul{
-    padding: auto;
-    width: 50%;
-}
-
-
-.tache-card-valid h3{
-    font-weight: 600;
-    text-align: center;
-    color: rgb(12, 12, 96);
-}
-
-
-.tache-card-number{
-    width: 50%;
+.tache-title{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.tache-title .tache-quantite{ 
+    font-size: 0.8rem;
+    color: rgb(14, 14, 144);
+}
+.tache-card-subcontent{
+    gap: 1rem;
+}
+
+.tache-card-subcontent ul{
+    padding-left: 0.8rem;
+    width: 50%;
+}
+
+.tache-card-valid h3{
+    font-weight: 700;
+    text-align: center;
+    color: rgb(12, 12, 96);
+    margin: 0;
+}
+
+.tache-label{
+    font-weight: 600;
+}
+
+.tache-card-number{
+    min-width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    flex: 1;
+}
+
+
+.tache-card-number p{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }

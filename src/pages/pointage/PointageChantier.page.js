@@ -27,7 +27,7 @@ const PointageChantier = () => {
       heureFin: form.chantier.heureFin,
       dureeDeplacement: form.chantier.dureeDeplacement,
     })
-    navigate("/pointage/pointage-horaire")
+    navigate("/pointage/pointage-horaire-chantier")
   }
 
   const handleReturn = () => {
