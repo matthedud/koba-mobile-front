@@ -1,48 +1,38 @@
 import { useContext, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { AuthContext } from "../../context/AuthContext"
 import "./LoginForm.css"
 import TextInput from "../inputs/TextInput"
 import PasswordInput from "../inputs/PasswordInput"
 import ButtonComp from "../buttons/ButtonComp"
-import Card from "../Card"
+import { LoadingContext } from "../../context/LoadingContext"
+
 
 function LoginForm(props) {
   const { storeToken, authenticateUser, API_URL } = useContext(AuthContext)
-
+  const { setLoading } = useContext(LoadingContext)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [errorMessage, setErrorMessage] = useState(undefined)
 
-  const navigate = useNavigate()
-
   const handleUsername = (e) => setUsername(e.target.value)
   const handlePassword = (e) => setPassword(e.target.value)
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault()
-    // Create an object representing the request body
     const requestBody = { username, password }
-
-    // Make an axios request to the API
-    // If POST request is successful redirect to login page
-    // If the request resolves with an error, set the error message in the state
-    axios
-      .post(`${API_URL}/auth/login`, requestBody)
-      .then((response) => {
-        console.log("JWT RETURNED", response.data)
-
+    setLoading(true)
+    try {
+      const response = await axios.post(`${API_URL}/auth/login`, requestBody)
+      if (response.data) {
         storeToken(response.data.authToken)
         authenticateUser()
-
-        //navigate('/')
-      })
-      .catch((error) => {
-        console.log(error)
-        const errorDescription = error.response.data.message
-        setErrorMessage(errorDescription)
-      })
+      }
+    } catch (error) {
+      const errorDescription = error?.response?.data?.message || ""
+      setErrorMessage(errorDescription)
+    }
+    setLoading(false)
   }
 
   return (
@@ -56,16 +46,15 @@ function LoginForm(props) {
             value={username}
             onChange={handleUsername}
             placeHolder={"Identifiant"}
-            zeroOK
           />
         </label>
 
         <label>
           Mot de Passe:
-          <PasswordInput value={password} onChange={handlePassword} zeroOK/>
+          <PasswordInput value={password} onChange={handlePassword} zeroOK />
         </label>
 
-        <ButtonComp type="submit">Connecter</ButtonComp>
+        <ButtonComp type="submit">Connexion</ButtonComp>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}

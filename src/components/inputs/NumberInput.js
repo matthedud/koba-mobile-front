@@ -4,7 +4,7 @@ import "./NumberInput.css"
 import "./InputComp.css"
 
 const NumberInput = (props) => {
-  const { name, onChange } = props
+  const { name, onChange, invalide, zeroOK, value } = props
 
   const changeHandler = (event) => {
     const value = parseFloat(event)
@@ -13,7 +13,7 @@ const NumberInput = (props) => {
   return (
     <InputNumber
       {...props}
-      className={`number-input ${props.invalide ? "invalide" : ""}`}
+      className={`number-input ${invalide && !value && !zeroOK ? "invalide" : ""}`}
       type="number"
       onChange={changeHandler}
     />

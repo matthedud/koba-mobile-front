@@ -1,7 +1,7 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import { AiOutlineUnorderedList } from 'react-icons/ai'
-import { BsFillCalendarDateFill } from 'react-icons/bs'
+import { MdPhotoCamera } from 'react-icons/md'
 import { FaMapMarkedAlt } from 'react-icons/fa'
 import { goolgleMapFormat } from "../context/utils"
 import Card from "./Card"
@@ -21,7 +21,8 @@ const ChantierCardList = (props) => {
         {props.adresse.ville}<FaMapMarkedAlt/>
         </a>
         <div className="element-item" onClick={onCellClicked}>DQE<AiOutlineUnorderedList/></div>
-        <div className="element-item" onClick={()=>{}}>Planning<BsFillCalendarDateFill/></div>
+        {/* <div className="element-item" onClick={()=>{}}>Planning<BsFillCalendarDateFill/></div> */}
+        <div className="element-item" onClick={()=>{}}>Photo<MdPhotoCamera/></div>
       </div>
     </Card>
   )

@@ -56,6 +56,7 @@ const TacheCardForm = (props) => {
           options={form.salarie}
         />
     </label> 
+    <label>Quantité total: {props.tacheChantier.quantite}{props.tacheChantier.tache?.unite?.nom}</label>
         <div className="tache-card-quantite">
     <label >Durée:
           <DurationInput
@@ -66,13 +67,15 @@ const TacheCardForm = (props) => {
             addonAfter='h'
           />
     </label>
-    <label >Quantite:
+    <label >avancement:
           <NumberInput
-            name="quantite"
-            value={props.quantite}
-            placeholder="quantite"
+            name="avancement"
+            value={props.avancement}
+            placeholder="avancement"
             onChange={changeHandler}
-            addonAfter={props.tacheChantier.tache?.unite?.nom}
+            min={0}
+            max={100}
+            addonAfter={'%'}
           />
     </label>
         </div>

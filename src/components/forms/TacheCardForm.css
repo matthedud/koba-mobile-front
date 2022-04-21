@@ -4,14 +4,17 @@
     margin: 1rem 0;
     padding: 0.5rem;
     width: 100%;
-    border: 1px solid rgb(253, 157, 157);
-    box-shadow:  0px 0px 7px 1px rgb(249, 87, 87);
-    min-width: 300px;
-}
-.tache-card.true{
     border: 1px solid rgb(186, 204, 255);
     box-shadow: 1px 1px 3px rgb(104, 147, 198);
+   
+    min-width: 300px;
 }
+
+.tache-card.invalide{
+    border: 1px solid rgb(253, 157, 157);
+    box-shadow:  0px 0px 7px 1px rgb(249, 87, 87);
+}
+
 .tache-card label{
     color: inherit;
     font-size: 1rem;

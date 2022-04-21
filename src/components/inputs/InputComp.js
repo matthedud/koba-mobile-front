@@ -2,11 +2,11 @@ import React from "react"
 import "./InputComp.css"
 
 const InputComp = (props) => {
-  const { value, className, type, name, placeholder, onChange } = props
+  const { value, className, type, name, placeholder, onChange, invalide, zeroOK } = props
   return (
     <input
       {...props}
-      className={`type-input ${className} ${props.invalide ? "invalide" : ""}`}
+      className={`type-input ${className} ${invalide && !value && !zeroOK ? "invalide" : ""}`}
       type={type}
       value={value}
       name={name}

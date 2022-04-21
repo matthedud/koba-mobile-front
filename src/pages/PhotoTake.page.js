@@ -84,7 +84,7 @@ const PhotoTake = () => {
 
   return (
     <>
-    <h1>Prendre une Photo</h1>
+    <h1>Ajouter une Photo</h1>
       <Card>
         <label htmlFor="chantier">
           Chantier:
