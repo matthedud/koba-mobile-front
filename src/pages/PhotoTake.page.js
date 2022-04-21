@@ -18,8 +18,6 @@ const PhotoTake = () => {
   const { getRequest, postRequest } = useContext(AuthContext)
   const { setLoading } = useContext(LoadingContext)
   const [chantiers, setChantiers] = useState([])
-  const [fileState, setFileState] = useState([])
-  const [file, setFile] = useState([])
   const [previewSource, setPreviewSource] = useState([])
 
   // function getBase64(file) {
@@ -86,6 +84,7 @@ const PhotoTake = () => {
   }
 
   const handleSubmit = async () => {
+    setLoading(true)
     if (!form.chantier) {
       message.error("choisir un chantier")
       return
@@ -112,6 +111,7 @@ const PhotoTake = () => {
     } catch (error) {
       console.log(error)
     }
+    setLoading(false)
   }
 
   const handleReturn = () => {
