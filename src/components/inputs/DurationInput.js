@@ -4,7 +4,7 @@ import moment from "moment"
 import "./DurationInput.css"
 
 const DurationInput = (props) => {
-  const { value, name} = props
+  const { value, name, zeroOK, invalide} = props
   const format = "HH:mm"
 
   const changeHandler = (event) => {
@@ -18,7 +18,7 @@ const DurationInput = (props) => {
       value={moment(value, format)}
       format={format}
       onChange={changeHandler}
-      status={`${props.invalide ? "error" : ""}`}
+      status={`${invalide && !value && !zeroOK ? "error" : ""}`}
     />
   )
 }

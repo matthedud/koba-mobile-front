@@ -1,8 +1,8 @@
 import React, { useContext } from "react"
-import { FormContext } from "../../context/FormContext"
-import { getHoursFromString, makeStringFromNumHours } from "../../context/utils"
+import { FormContext } from "../context/FormContext"
+import { getHoursFromString, makeStringFromNumHours } from "../context/utils"
 import  './SalarieHeureCompteur.css'
-
+ 
 const SalarieHeureCompteur = (props) => {
   const { form } = useContext(FormContext)
 

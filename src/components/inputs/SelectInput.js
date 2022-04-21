@@ -4,7 +4,7 @@ import "./SelectInput.css"
 import "./InputComp.css"
 
 const SelectInput = (props) => {
-  const { onChange, name, options, placeholder, isMulti } = props
+  const { onChange, name, options, placeholder, isMulti, invalide, value, zeroOK } = props
 
   const changeHandler = (value) => {
     onChange({ value, name })
@@ -39,7 +39,7 @@ const SelectInput = (props) => {
       options={options}
       getOptionLabel={(option) => option.nom}
       getOptionValue={(option) => option._id}
-      className={`select ${props.invalide ? "invalide" : ""}`}
+      className={`select ${invalide && !value && !zeroOK ? "invalide" : ""}`}
       isMulti={isMulti}
     />
   )

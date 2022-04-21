@@ -11,7 +11,6 @@ import PlanningRealise from "./pages/planning/PlanningRealise.page"
 import PlanningHebdo from "./pages/planning/PlanningHebdo.page"
 import PlanningHome from "./pages/planning/PlanningHome.page"
 import PhotoTake from "./pages/PhotoTake.page"
-import PhotoForm from "./pages/PhotoForm.page"
 import PointageHoraire from "./pages/pointage/PointageHoraire.page"
 import PointageChantier from "./pages/pointage/PointageChantier.page"
 import PointageTache from "./pages/pointage/PointageTache.page"
@@ -46,7 +45,6 @@ function App() {
               <Route index element={<PlanningHome />} />
             </Route>
             <Route path="/photo/*">
-              <Route path="photo-form" element={<PhotoForm />} />
               <Route index element={<PhotoTake />} />
             </Route>
             <Route path="/chantiers/*">

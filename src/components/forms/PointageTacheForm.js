@@ -9,7 +9,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom"
 import ButtonComp from "../buttons/ButtonComp"
 import TacheCardForm from "./TacheCardForm"
-import SalarieHeureCompteur from "../inputs/SalarieHeureCompteur"
+import SalarieHeureCompteur from "../SalarieHeureCompteur"
 import Card from "../Card"
 
 let counter = 0
