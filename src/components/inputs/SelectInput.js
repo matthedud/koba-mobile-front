@@ -39,7 +39,7 @@ const SelectInput = (props) => {
       options={options}
       getOptionLabel={(option) => option.nom}
       getOptionValue={(option) => option._id}
-      className={`select ${invalide && !value && !zeroOK ? "invalide" : ""}`}
+      className={`select ${invalide && !value ? "invalide" : ""}`}
       isMulti={isMulti}
     />
   )

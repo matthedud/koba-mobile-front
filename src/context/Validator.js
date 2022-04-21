@@ -21,6 +21,10 @@ export const checkInterventionValid = (intervention, noFeedBack) =>{
       if (!noFeedBack) message.error('entrer une quantite')
       return false
     }
+    if(!intervention.avancement){
+      if (!noFeedBack) message.error('entrer une avancement')
+      return false
+    }
     if(!intervention.duree){
       if (!noFeedBack) message.error('entrer une quantite')
       return false

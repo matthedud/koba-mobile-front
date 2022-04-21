@@ -9,27 +9,37 @@ import ButtonFoorterGroupe from "../../components/buttons/ButtonFoorterGroupe"
 
 const PointageTache = () => {
   const navigate = useNavigate()
-  const { form, onChange } = useContext(FormContext)
+  const { form, setForm } = useContext(FormContext)
 
   const handleSubmit = () => {
     const newIntervention = []
     for (const intervention of form.intervention) {
-      if (!checkInterventionValid(intervention)) return
+      if (!checkInterventionValid(intervention)){
+        const changeIntervention = [...form.intervention]
+        const index = changeIntervention.findIndex(el=>el.idForm===intervention.idForm)
+        if(index>-1){
+          const newValue = {...changeIntervention[index], invalide:true}
+          changeIntervention[index] = newValue
+          setForm({...form, 'intervention':changeIntervention, })
+        }
+        return
+      } 
       else {
         const quantite =
-          (intervention.tacheChantier *
+          (intervention.tacheChantier.quantite *
             (intervention.avancement - intervention.tacheChantier.avancement)) /
           100
-          newIntervention.push({...intervention, quantite})
+          console.log({quantite});
+          newIntervention.push({...intervention, quantite, invalide:false})
       }
     }
-    onChange(newIntervention, 'intervention')
+    setForm({...form, 'intervention':newIntervention, })
     navigate("/pointage/pointage-validation")
   }
-
   const handleReturn = () => {
     navigate("/pointage/pointage-horaire-salarie")
   }
+
   return (
     <>
       <PointageTacheForm />
