@@ -7,7 +7,7 @@ import CheckButton from "../buttons/CheckButton"
 import DeleteButton from "../buttons/DeleteButton"
 import ButtonCardGroupe from "../buttons/ButtonCardGroupe"
 import { FormContext } from "../../context/FormContext"
-import { checkInterventionValid } from "../../context/utils"
+import { checkInterventionValid, getHoursFromString, makeStringFromNumHours } from "../../context/utils"
 
 const TacheCardForm = (props) => {
   const { form, onChange, setForm } = useContext(FormContext)
@@ -23,7 +23,36 @@ const TacheCardForm = (props) => {
       onChange({ value: newValue, name: "intervention" })
     }
   }
-  
+
+  const changeTache = (event) => {
+    const { value, name } = event.target || event
+    const index = form.intervention.findIndex((el) => el._id === props._id)
+    if (index > -1) {
+      const newValue = [...form.intervention]
+      const dureeHeure = getHoursFromString(newValue[index].duree)
+      const quantite = value.equipe.length
+        ? Number(
+            (
+              (dureeHeure * value.rendementEquipe * newValue[index].salarie.length) /
+              value.equipe.length
+            ).toFixed(3)
+          )
+        : 0
+      const avancementCalcule = value.quantite
+        ? Number(((quantite * 100) / value.quantite).toFixed(3)) + value.avancement
+        : 0
+      let avancement = avancementCalcule
+      let duree = newValue[index].duree
+      if (avancementCalcule > 100) {
+        avancement = 100
+        const newDuree = Math.floor((dureeHeure * 100)/avancementCalcule)
+        duree = makeStringFromNumHours(newDuree)
+      }
+      newValue[index] = { ...newValue[index], [name]: value, avancement, duree }
+      onChange({ value: newValue, name: "intervention" })
+    }
+  }
+
   const deleteIntervention = () => {
     const index = form.intervention.findIndex((el) => el._id === props._id)
     if (index > -1) {
@@ -35,58 +64,67 @@ const TacheCardForm = (props) => {
 
   return (
     <div className={`tache-card ${valide}`}>
-    <label > Tache:
-      <SelectInput
-        name="tacheChantier"
-        value={props.tacheChantier?.tache}
-        placeholder="Tache"
-        onChange={changeHandler}
-        options={props.taches}
-      />
-    </label>
-      {props.tacheChantier?
-      <div className="tache-card-subcontent">
-    <label > Main d'Oeuvre:
+      <label>
+        {" "}
+        Tache:
         <SelectInput
-          name="salarie"
-          value={props.salarie}
-          placeholder="Equipe"
-          isMulti={true}
-          onChange={changeHandler}
-          options={form.salarie}
+          name="tacheChantier"
+          value={props.tacheChantier?.tache}
+          placeholder="Tache"
+          onChange={changeTache}
+          options={props.taches}
         />
-    </label> 
-    <label>Quantité total: {props.tacheChantier.quantite}{props.tacheChantier.tache?.unite?.nom}</label>
-        <div className="tache-card-quantite">
-    <label >Durée:
-          <DurationInput
-            name="duree"
-            value={props.duree}
-            placeholder="Durée"
-            onChange={changeHandler}
-            addonAfter='h'
-          />
-    </label>
-    <label >avancement:
-          <NumberInput
-            name="avancement"
-            value={props.avancement}
-            placeholder="avancement"
-            onChange={changeHandler}
-            min={0}
-            max={100}
-            addonAfter={'%'}
-          />
-    </label>
+      </label>
+      {props.tacheChantier ? (
+        <div className="tache-card-subcontent">
+          <label>
+            {" "}
+            Main d'Oeuvre:
+            <SelectInput
+              name="salarie"
+              value={props.salarie}
+              placeholder="Equipe"
+              isMulti={true}
+              onChange={changeHandler}
+              options={form.salarie}
+            />
+          </label>
+          <label>
+            Quantité total: {props.tacheChantier.quantite}
+            {props.tacheChantier.tache?.unite?.nom}
+          </label>
+          <div className="tache-card-quantite">
+            <label>
+              Durée:
+              <DurationInput
+                name="duree"
+                value={props.duree}
+                placeholder="Durée"
+                onChange={changeHandler}
+                addonAfter="h"
+              />
+            </label>
+            <label>
+              avancement:
+              <NumberInput
+                name="avancement"
+                value={props.avancement}
+                placeholder="avancement"
+                onChange={changeHandler}
+                min={props.tacheChantier.avancement}
+                max={100}
+                addonAfter={"%"}
+              />
+            </label>
+          </div>
         </div>
-      </div>
-      :null}
+      ) : null}
       <ButtonCardGroupe>
         <DeleteButton onClick={deleteIntervention} />
-        {props.valide ? <div/> : (
-          <CheckButton
-            onClick={() => changeHandler({ value: true, name: "valide" }, props._id)}
-          />
+        {props.valide ? (
+          <div />
+        ) : (
+          <CheckButton onClick={() => changeHandler({ value: true, name: "valide" }, props._id)} />
         )}
       </ButtonCardGroupe>
     </div>

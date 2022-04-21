@@ -1,14 +1,14 @@
 import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import SubmitButton from "../../components/buttons/SubmitButton"
-import PointageHoraireForm from "../../components/forms/PointageHoraireForm"
+import PointageHoraireChantierForm from "../../components/forms/PointageHoraireChantierForm"
 import ReturnButton from "../../components/buttons/ReturnButton"
 import { FormContext } from "../../context/FormContext"
 import { message } from "antd"
 import { getHoursFromString, makeStringFromNumHours } from "../../context/utils"
 import ButtonFoorterGroupe from "../../components/buttons/ButtonFoorterGroupe"
 
-const PointageHoraire = () => {
+const PointageHoraireChantier = () => {
   const { form, setForm } = useContext(FormContext)
   const navigate = useNavigate()
 
@@ -31,8 +31,15 @@ const PointageHoraire = () => {
     }
     const dureeHeure = getHoursFromString(form.heureFin) - getHoursFromString(form.heureDebut)
     const duree = makeStringFromNumHours(dureeHeure)
-    setForm({ ...form, duree, dureeHeure })
-    navigate("/pointage/pointage-tache")
+    const newSalarier = form.salarie.map((salarie) => ({
+      ...salarie,
+      dureeHeure,
+      duree,
+      heureDebut: form.heureDebut,
+      heureFin: form.heureFin,
+    }))
+    setForm({ ...form, duree, dureeHeure, salarie: newSalarier })
+    navigate("/pointage/pointage-horaire-salarie")
   }
 
   const handleReturn = () => {
@@ -40,7 +47,7 @@ const PointageHoraire = () => {
   }
   return (
     <>
-      <PointageHoraireForm />
+      <PointageHoraireChantierForm />
       <ButtonFoorterGroupe>
         <ReturnButton onClick={handleReturn} />
         <SubmitButton onClick={handleSubmit} />
@@ -49,4 +56,4 @@ const PointageHoraire = () => {
   )
 }
 
-export default PointageHoraire
+export default PointageHoraireChantier

@@ -14,14 +14,12 @@ const AuthContext = createContext()
 function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [isAdmin, setIsAdmin] = useState(true)
   const [user, setUser] = useState(null)
 
   const location = useLocation()
 
   useEffect(() => {
     authenticateUser()
-    console.log("handle route change here", location)
   }, [location])
 
   const storeToken = (token) => {
@@ -53,20 +51,14 @@ function AuthProviderWrapper(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          console.log("USER IS LOGGED IN!")
-
           // If the server verifies that JWT is valid
           const user = response.data
           // Update state variables
           setIsLoggedIn(true)
-          if (user.roles?.admin) {
-            setIsAdmin(true)
-          }
           setIsLoading(false)
           setUser(user)
         })
         .catch((error) => {
-          console.log("USER IS LOGGED OUT!")
           // If the server sends an error response (invalid token)
           // Update state variables
           setIsLoggedIn(false)

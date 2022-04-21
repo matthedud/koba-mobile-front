@@ -23,7 +23,7 @@ const PointageTache = () => {
   }
 
   const handleReturn= ()=>{
-    navigate('/pointage/pointage-horaire')
+    navigate('/pointage/pointage-horaire-salarie')
   }
   return (
     <>
