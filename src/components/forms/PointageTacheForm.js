@@ -43,10 +43,12 @@ const PointageTacheForm = (props) => {
                   el.equipe.length
                 ).toFixed(3)
               )
-              const avancement = el.quantite? Number((quantite*100/el.quantite).toFixed(2))+ el.avancement: 0
+              const avancement = el.quantite
+                ? Number(((quantite * 100) / el.quantite).toFixed(2)) + el.avancement
+                : 0
               counter++
               return {
-                _id: "N" + counter,
+                idForm: "N" + counter,
                 tacheChantier: { ...el },
                 nom: el.tache.nom,
                 duree: form.duree,
@@ -80,7 +82,7 @@ const PointageTacheForm = (props) => {
     const duree = form.duree
     counter++
     const newIntervention = {
-      _id: "N" + counter,
+      idForm: "N" + counter,
       tacheChantier: null,
       salarie: form.salarie,
       duree,
@@ -90,24 +92,23 @@ const PointageTacheForm = (props) => {
     setForm({ ...form, intervention: [newIntervention, ...form.intervention] })
   }
 
-  const refreshHeureTravailler = () => {}
-
   return (
     <>
       <ButtonComp onClick={addTache}>
         <AiOutlinePlusCircle /> Ajouter Tache <div />
       </ButtonComp>
-      {form?.intervention?.length > 0
-        ? form.intervention.map((intervention) => (
-            <TacheCardForm key={intervention._id} {...intervention} taches={tacheChantier} />
-          ))
-        : null}
       {form?.intervention ? (
         <Card>
           <SalarieHeureCompteur />
         </Card>
       ) : null}
-      <div style={{marginBottom: "5rem"}}></div>
+      {form?.intervention?.length > 0
+        ? form.intervention.map((intervention) => (
+            <TacheCardForm key={intervention.idForm} {...intervention} taches={tacheChantier} />
+          ))
+        : null}
+
+      <div style={{ marginBottom: "5rem" }}></div>
     </>
   )
 }

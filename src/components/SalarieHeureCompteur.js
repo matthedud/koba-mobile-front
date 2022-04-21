@@ -9,7 +9,7 @@ const SalarieHeureCompteur = (props) => {
   const data = form.salarie?.map((salarie) => {
     const heureTravailler = form.intervention?.reduce((total, intervention) => {
       if (intervention.salarie.find((el) => el._id === salarie._id))
-        return (total += getHoursFromString(intervention.duree))
+        return (total += getHoursFromString(salarie.duree))
       return total
     }, 0)
     const heures = makeStringFromNumHours(form.dureeHeure - heureTravailler)

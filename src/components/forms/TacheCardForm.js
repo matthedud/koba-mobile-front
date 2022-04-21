@@ -7,7 +7,8 @@ import CheckButton from "../buttons/CheckButton"
 import DeleteButton from "../buttons/DeleteButton"
 import ButtonCardGroupe from "../buttons/ButtonCardGroupe"
 import { FormContext } from "../../context/FormContext"
-import { checkInterventionValid, getHoursFromString, makeStringFromNumHours } from "../../context/utils"
+import { checkInterventionValid } from "../../context/Validator"
+import { getHoursFromString, makeStringFromNumHours } from "../../context/utils"
 
 const TacheCardForm = (props) => {
   const { form, onChange, setForm } = useContext(FormContext)
@@ -16,7 +17,7 @@ const TacheCardForm = (props) => {
 
   const changeHandler = (event) => {
     const { value, name } = event.target || event
-    const index = form.intervention.findIndex((el) => el._id === props._id)
+    const index = form.intervention.findIndex((el) => el.idForm === props.idForm)
     if (index > -1) {
       const newValue = [...form.intervention]
       newValue[index] = { ...newValue[index], [name]: value }
@@ -26,7 +27,7 @@ const TacheCardForm = (props) => {
 
   const changeTache = (event) => {
     const { value, name } = event.target || event
-    const index = form.intervention.findIndex((el) => el._id === props._id)
+    const index = form.intervention.findIndex((el) => el.idForm === props.idForm)
     if (index > -1) {
       const newValue = [...form.intervention]
       const dureeHeure = getHoursFromString(newValue[index].duree)
@@ -54,7 +55,7 @@ const TacheCardForm = (props) => {
   }
 
   const deleteIntervention = () => {
-    const index = form.intervention.findIndex((el) => el._id === props._id)
+    const index = form.intervention.findIndex((el) => el.idForm === props.idForm)
     if (index > -1) {
       const newIntervention = [...form.intervention]
       newIntervention.splice(index, 1)
