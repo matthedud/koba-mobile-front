@@ -10,40 +10,42 @@ import TextAreaInput from "../components/inputs/TextAreaInput"
 import { AuthContext } from "../context/AuthContext"
 import { FormContext } from "../context/FormContext"
 import { LoadingContext } from "../context/LoadingContext"
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from "@ant-design/icons"
 
 const PhotoTake = () => {
   const navigate = useNavigate()
   const { form, onChange, setForm } = useContext(FormContext)
-  const { getRequest } = useContext(AuthContext)
+  const { getRequest, postRequest } = useContext(AuthContext)
   const { setLoading } = useContext(LoadingContext)
   const [chantiers, setChantiers] = useState([])
+  const [fileState, setFileState] = useState([])
+  const [file, setFile] = useState([])
+  const [previewSource, setPreviewSource] = useState([])
 
-  function getBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
+  // function getBase64(file) {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onload = () => resolve(reader.result);
+  //     reader.onerror = error => reject(error);
+  //   });
+  // }
 
-  const handleCancel = () => this.setState({ previewVisible: false });
+  // const handleCancel = () => this.setState({ previewVisible: false });
 
-  const handlePreview = async file => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
+  // const handlePreview = async file => {
+  //   if (!file.url && !file.preview) {
+  //     file.preview = await getBase64(file.originFileObj);
+  //   }
 
-    // this.setState({
-    //   previewImage: file.url || file.preview,
-    //   previewVisible: true,
-    //   previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
-    // });
-  };
+  // this.setState({
+  //   previewImage: file.url || file.preview,
+  //   previewVisible: true,
+  //   previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
+  // });
+  // };
 
-  const handleChange = ({ fileList }) => this.setState({ fileList });
-
+  // const handleChange = ({ fileList }) => this.setState({ fileList });
 
   useEffect(() => {
     const getChantier = async () => {
@@ -61,19 +63,60 @@ const PhotoTake = () => {
   }, [])
 
   // const { previewVisible, previewImage, fileList, previewTitle } = this.state;
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
-   
+  // const uploadButton = (
+  //   <div>
+  //     <PlusOutlined />
+  //     <div style={{ marginTop: 8 }}>Upload</div>
+  //   </div>
+  // );
 
+  const handleFile = (event) => {
+    console.log({ event })
+    const file = event.target.files[0]
+    // setFileState(event.target.files)
+    previewFile(file)
+  }
+
+  const previewFile = (file) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onloadend = () => {
+      setPreviewSource(reader.result)
+    }
+  }
 
   const handleSubmit = () => {
-    setForm({})
-    message.info('photo sauvegardée')
-    navigate("/")
+    if (!form.chantier) {
+      message.error("choisir un chantier")
+      return
+    }
+
+    if (!previewSource) {
+      message.error("choisir un chantier")
+      return
+    }
+    uploadImage(previewSource)
+  }
+
+  const uploadImage = (base) => {
+    try {
+      let poste = []
+      if (form.poste) {
+        poste = form.poste.map((el) => el._id)
+      }
+      postRequest("/upload", {
+        image: base,
+        chantier: form.chantier._id,
+        poste,
+        commentaire: form.commentiare,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+
+    // setForm({})
+    // message.info('photo sauvegardée')
+    // navigate("/")
   }
 
   const handleReturn = () => {
@@ -81,10 +124,9 @@ const PhotoTake = () => {
     navigate("/")
   }
 
-
   return (
     <>
-    <h1>Ajouter une Photo</h1>
+      <h1>Ajouter une Photo</h1>
       <Card>
         <label htmlFor="chantier">
           Chantier:
@@ -109,7 +151,7 @@ const PhotoTake = () => {
             />
           </label>
         ) : null}
-        <>
+        {/* <>
       <Upload
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         listType="picture-card"
@@ -127,15 +169,16 @@ const PhotoTake = () => {
       >
         <img alt="example" style={{ width: '100%' }} src={form.previewImage} />
       </Modal>
-    </>
+    </> */}
+        <input type="file" name="image" onChange={handleFile} />
         <label htmlFor="salarie">
           Commentaire:
           <TextAreaInput
-          name="commentaire"
-          value={form.commentaire}
-          placeholder="Commentaire"
-          onChange={onChange}
-        />
+            name="commentaire"
+            value={form.commentaire}
+            placeholder="Commentaire"
+            onChange={onChange}
+          />
         </label>
       </Card>
       <ButtonFoorterGroupe>

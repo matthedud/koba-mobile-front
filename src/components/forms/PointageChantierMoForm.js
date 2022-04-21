@@ -45,7 +45,7 @@ const PointageChantierMoForm = () => {
           placeholder="Chantier"
           onChange={onChange}
           options={chantiers}
-          zeroOK
+          invalide={form.invalide}
         />
       </label>
       <label htmlFor="salarie">
@@ -57,6 +57,7 @@ const PointageChantierMoForm = () => {
           isMulti={true}
           onChange={onChange}
           options={salaries}
+          invalide={form.invalide}
         />
       </label>
     </Card></>

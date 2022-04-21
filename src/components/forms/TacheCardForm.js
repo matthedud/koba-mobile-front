@@ -46,7 +46,7 @@ const TacheCardForm = (props) => {
       let duree = newValue[index].duree
       if (avancementCalcule > 100) {
         avancement = 100
-        const newDuree = Math.floor((dureeHeure * 100)/avancementCalcule)
+        const newDuree = Math.floor((dureeHeure * 100) / avancementCalcule)
         duree = makeStringFromNumHours(newDuree)
       }
       newValue[index] = { ...newValue[index], [name]: value, avancement, duree }
@@ -62,9 +62,8 @@ const TacheCardForm = (props) => {
       setForm({ ...form, intervention: newIntervention })
     }
   }
-
   return (
-    <div className={`tache-card ${valide}`}>
+    <div className={`tache-card ${props.invalide && !props.valide ? "invalide" : ""}`}>
       <label>
         {" "}
         Tache:
@@ -74,6 +73,7 @@ const TacheCardForm = (props) => {
           placeholder="Tache"
           onChange={changeTache}
           options={props.taches}
+          invalide={props.invalide}
         />
       </label>
       {props.tacheChantier ? (
@@ -88,6 +88,7 @@ const TacheCardForm = (props) => {
               isMulti={true}
               onChange={changeHandler}
               options={form.salarie}
+              invalide={props.invalide}
             />
           </label>
           <label>
@@ -103,6 +104,7 @@ const TacheCardForm = (props) => {
                 placeholder="Durée"
                 onChange={changeHandler}
                 addonAfter="h"
+                invalide={props.invalide}
               />
             </label>
             <label>
@@ -115,6 +117,7 @@ const TacheCardForm = (props) => {
                 min={props.tacheChantier.avancement}
                 max={100}
                 addonAfter={"%"}
+                invalide={props.invalide}
               />
             </label>
           </div>

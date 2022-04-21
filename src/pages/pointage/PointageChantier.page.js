@@ -13,11 +13,13 @@ const PointageChantier = () => {
 
   const handleSubmit = () => {
     if (!form.chantier?._id) {
+      setForm({...form, invalide:true})
       message.error("entrer un chantier")
       return
     }
     console.log('form.salarie?.length', form.salarie?.length);
     if (!form.salarie?.length >0) {
+      setForm({...form, invalide:true})
       message.error("ajouter une persone")
       return
     }
@@ -26,6 +28,7 @@ const PointageChantier = () => {
       heureDebut: form.chantier.heureDebut,
       heureFin: form.chantier.heureFin,
       dureeDeplacement: form.chantier.dureeDeplacement,
+      invalide:false
     })
     navigate("/pointage/pointage-horaire-chantier")
   }
