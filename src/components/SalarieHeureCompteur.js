@@ -1,28 +1,17 @@
 import React, { useContext } from "react"
 import { FormContext } from "../context/FormContext"
-import { getHoursFromString, makeStringFromNumHours } from "../context/utils"
+import { heurAPointe } from "../context/utils"
 import  './SalarieHeureCompteur.css'
  
 const SalarieHeureCompteur = (props) => {
   const { form } = useContext(FormContext)
 
-  const data = form.salarie?.map((salarie) => {
-    const heureTravailler = form.intervention?.reduce((total, intervention) => {
-      if (intervention.salarie.find((el) => el._id === salarie._id))
-        return (total += getHoursFromString(salarie.duree))
-      return total
-    }, 0)
-    const heures = makeStringFromNumHours(form.dureeHeure - heureTravailler)
-    return {
-      ...salarie,
-      heures
-    }
-  })
+  const data = heurAPointe(form)
 
   return <div className="salarie-heure-compteur-card">
     <label>Heures restant à pointer:</label>
   <ul>{
-    data.map(salarie=><li key={salarie._id}>{`${salarie.nom} : ${salarie.heures}`}</li>)
+    data.map(salarie=>salarie.dureeHeure?<li key={salarie._id}>{`${salarie.nom} : ${salarie.heures}`}</li>:null)
   }</ul></div>
 }
 

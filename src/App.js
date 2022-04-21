@@ -23,7 +23,6 @@ import PhotoChantier from "./pages/PhotoChantier.page"
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext)
-  console.log({ isLoggedIn })
   return (
     <div className="App">
       <LoadingOverLay />

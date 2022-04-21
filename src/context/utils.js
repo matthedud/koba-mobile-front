@@ -28,3 +28,19 @@ export const goolgleMapFormat = (adresse) => {
 
   return { googleLink, adresse: newAdresse }
 }
+
+
+export const heurAPointe = form => form.salarie?.map((salarie) => {
+  const heureTravailler = form.intervention?.reduce((total, intervention) => {
+    if (intervention.salarie.find((el) => el._id === salarie._id))
+      return (total += getHoursFromString(intervention.duree))
+    return total
+  }, 0)
+  const dureeHeure = salarie.dureeHeure - heureTravailler
+  const heures = makeStringFromNumHours(dureeHeure)
+  return {
+    ...salarie,
+    heures,
+    dureeHeure,
+  }
+})
