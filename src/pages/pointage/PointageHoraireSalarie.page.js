@@ -4,34 +4,23 @@ import SubmitButton from "../../components/buttons/SubmitButton"
 import PointageHoraireSalarieForm from "../../components/forms/PointageHoraireSalarieForm"
 import ReturnButton from "../../components/buttons/ReturnButton"
 import { FormContext } from "../../context/FormContext"
-import { message } from "antd"
 import { getHoursFromString, makeStringFromNumHours } from "../../context/utils"
 import ButtonFoorterGroupe from "../../components/buttons/ButtonFoorterGroupe"
+import { validHoraire } from "../../context/Validator"
 
 const PointageHoraireSalarie = () => {
   const { form, setForm } = useContext(FormContext)
   const navigate = useNavigate()
 
   const handleSubmit = () => {
-    if (!form.heureDebut) {
-      message.error("entrer l'heure de début sur chantier")
-      return
+    const newSalarier = []
+    for(const salarie of form.salarie){
+      if(!validHoraire(form)) return
+      const dureeHeure = getHoursFromString(salarie.heureFin) - getHoursFromString(salarie.heureDebut)
+      const duree = makeStringFromNumHours(dureeHeure)
+      newSalarier.push({...salarie, duree, dureeHeure})
     }
-    if (!form.heureFin) {
-      message.error("entrer l'heure de fin de chantier")
-      return
-    }
-    if (form.heureFin < form.heureDebut) {
-      message.error("L'heure de Début doit être inférieur à l'heure de fin")
-      return
-    }
-    if (!form.dureeDeplacement) {
-      message.error("ajouter un temps de déplacement")
-      return
-    }
-    const dureeHeure = getHoursFromString(form.heureFin) - getHoursFromString(form.heureDebut)
-    const duree = makeStringFromNumHours(dureeHeure)
-    setForm({ ...form, duree, dureeHeure })
+    setForm({ ...form, salarie:newSalarier })
     navigate("/pointage/pointage-tache")
   }
 

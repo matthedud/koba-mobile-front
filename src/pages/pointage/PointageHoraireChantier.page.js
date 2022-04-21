@@ -7,24 +7,14 @@ import { FormContext } from "../../context/FormContext"
 import { message } from "antd"
 import { getHoursFromString, makeStringFromNumHours } from "../../context/utils"
 import ButtonFoorterGroupe from "../../components/buttons/ButtonFoorterGroupe"
+import { validHoraire } from "../../context/Validator"
 
 const PointageHoraireChantier = () => {
   const { form, setForm } = useContext(FormContext)
   const navigate = useNavigate()
 
   const handleSubmit = () => {
-    if (!form.heureDebut) {
-      message.error("entrer l'heure de début sur chantier")
-      return
-    }
-    if (!form.heureFin) {
-      message.error("entrer l'heure de fin de chantier")
-      return
-    }
-    if (form.heureFin < form.heureDebut) {
-      message.error("L'heure de Début doit être inférieur à l'heure de fin")
-      return
-    }
+    if(!validHoraire(form)) return
     if (!form.dureeDeplacement) {
       message.error("ajouter un temps de déplacement")
       return

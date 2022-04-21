@@ -6,8 +6,8 @@ const API_URL =
   !process.env.NODE_ENV || process.env.NODE_ENV === "development"
     ? "http://localhost:5005/api"
     : "https://koba-mobile-back.herokuapp.com/api"
-    
-  // process.env.REACT_APP_API_URL
+
+// process.env.REACT_APP_API_URL
 
 const AuthContext = createContext()
 
@@ -34,11 +34,19 @@ function AuthProviderWrapper(props) {
     const storedToken = localStorage.getItem("authToken")
     if (storedToken) {
       return axios.get(`${API_URL}${url}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
+        headers: { authorization: `Bearer ${storedToken}` },
       })
     }
   }
-
+  const postRequest = (url, data) => {
+    const storedToken = localStorage.getItem("authToken")
+    console.log({storedToken, url, data});
+    if (storedToken) {
+      return axios.post(`${API_URL}${url}`, data ,{
+        headers: { authorization: `Bearer ${storedToken}` },
+      })
+    }
+  }
   const authenticateUser = () => {
     // Get the stored token from the localStorage
     const storedToken = localStorage.getItem("authToken")
@@ -48,7 +56,7 @@ function AuthProviderWrapper(props) {
       // We must send the JWT token in the request's "Authorization" Headers
       axios
         .get(`${API_URL}/auth/verify`, {
-          headers: { Authorization: `Bearer ${storedToken}` },
+          headers: { authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
           // If the server verifies that JWT is valid
@@ -89,6 +97,7 @@ function AuthProviderWrapper(props) {
     <AuthContext.Provider
       value={{
         getRequest,
+        postRequest,
         API_URL,
         isLoggedIn,
         isLoading,
