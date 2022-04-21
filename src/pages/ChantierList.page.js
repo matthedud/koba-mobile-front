@@ -1,6 +1,7 @@
 import { message } from "antd"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import ButtonFoorterGroupe from "../components/buttons/ButtonFoorterGroupe"
 import ReturnButton from "../components/buttons/ReturnButton"
 import ChantierCardList from "../components/ChantierCardList"
 import { AuthContext } from "../context/AuthContext"
@@ -15,13 +16,12 @@ const ChantierList = () => {
   useEffect(() => {
     const getDQE = async () => {
       setLoading(true)
-      try{
+      try {
         const chantierData = await getRequest(`/chantiers`)
         if (chantierData?.data) setGridData(chantierData.data)
-      }
-      catch(err){
-        message.error('erreur de connexion')
-        console.log({err});
+      } catch (err) {
+        message.error("erreur de connexion")
+        console.log({ err })
       }
       setLoading(false)
     }
@@ -30,9 +30,13 @@ const ChantierList = () => {
 
   return (
     <>
-      {gridData.map(chantier=><ChantierCardList key={chantier._id} {...chantier} />)}
-      <ReturnButton onClick={()=>navigate('/')} />
-
+      {gridData.map((chantier) => (
+        <ChantierCardList key={chantier._id} {...chantier} />
+      ))}
+      <div style={{ marginBottom: "5rem" }}></div>
+      <ButtonFoorterGroupe>
+        <ReturnButton onClick={() => navigate("/")} />
+      </ButtonFoorterGroupe>
     </>
   )
 }

@@ -6,10 +6,9 @@ import ReturnButton from "../../components/buttons/ReturnButton"
 import { checkInterventionValid } from "../../context/Validator"
 import { FormContext } from "../../context/FormContext"
 import ButtonFoorterGroupe from "../../components/buttons/ButtonFoorterGroupe"
-import { heurAPointe } from "../../context/utils"
-import { message } from "antd"
 
-const PointageTache = () => {
+
+const PointageTacheEdit = () => {
   const navigate = useNavigate()
   const { form, setForm } = useContext(FormContext)
 
@@ -34,17 +33,6 @@ const PointageTache = () => {
           newIntervention.push({...intervention, quantite, invalide:false})
       }
     }
-    const checkHoraire = heurAPointe(form)
-    for(const salarie of checkHoraire){
-      if(salarie.dureeHeure > 0 ){
-        message.error(`pas assez d'heures de pointé pour ${salarie.nom}`)
-        return
-      }
-      if(salarie.dureeHeure < 0 ){
-        message.error(`trop d'heures pointé pour ${salarie.nom}`)
-        return
-      }
-    }
     setForm({...form, 'intervention':newIntervention, })
     navigate("/pointage/pointage-validation")
   }
@@ -63,4 +51,4 @@ const PointageTache = () => {
   )
 }
 
-export default PointageTache
+export default PointageTacheEdit
