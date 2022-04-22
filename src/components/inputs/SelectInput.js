@@ -29,6 +29,10 @@ const SelectInput = (props) => {
       color: "rgb(12, 12, 96)",
       backgroundColor:'rgb(198, 228, 255)'
     }),
+    menu: (provided, state) => ({
+      ...provided,
+      zIndex:9999, 
+    }),
   }
   return (
     <Select
