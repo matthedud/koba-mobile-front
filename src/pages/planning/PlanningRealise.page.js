@@ -23,6 +23,8 @@ const PlanningRealise = () => {
     try {
         const pointagesDataReq = await getRequest(`/pointage`)
         setPointages(pointagesDataReq.data)
+        const chantierNomReq = await getRequest(`/chantiers/${pointagesDataReq.data[0].chantierID}`)
+        console.log('ZOUZOU',chantierNomReq.data)
     } catch (err) {
         message.error("erreur de connexion")
         console.log({ err })
