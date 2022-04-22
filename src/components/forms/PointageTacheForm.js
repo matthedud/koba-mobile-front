@@ -11,6 +11,7 @@ import ButtonComp from "../buttons/ButtonComp"
 import TacheCardForm from "./TacheCardForm"
 import SalarieHeureCompteur from "../SalarieHeureCompteur"
 import Card from "../Card"
+import { makeStringFromNumHours, heurAPointe, getHoursFromString } from "../../context/utils"
 
 let counter = 0
 
@@ -36,10 +37,14 @@ const PointageTacheForm = (props) => {
             `/tachesPrevu/${form.chantier._id}/${formatedDate}`
           )
           if (tacheChantierData?.data) {
+            const dureeHeure = tacheChantierData?.data.length
+              ? form.dureeHeure / tacheChantierData?.data.length
+              : 0
+            const duree = makeStringFromNumHours(dureeHeure)
             const intervention = tacheChantierData?.data.map((el) => {
               const quantite = Number(
                 (
-                  (form.dureeHeure * el.rendementEquipe * form.salarie.length) /
+                  (dureeHeure * el.rendementEquipe * form.salarie.length) /
                   el.equipe.length
                 ).toFixed(3)
               )
@@ -51,7 +56,7 @@ const PointageTacheForm = (props) => {
                 idForm: "N" + counter,
                 tacheChantier: { ...el },
                 nom: el.tache.nom,
-                duree: form.duree,
+                duree: duree,
                 quantite,
                 avancement,
                 valide: false,
@@ -79,7 +84,14 @@ const PointageTacheForm = (props) => {
   }, [])
 
   const addTache = () => {
-    const duree = form.duree
+    const dureeResetant = heurAPointe(form)
+    const duree = dureeResetant.reduce((res, salarie) => {
+      const numRes = getHoursFromString(res)
+      if (numRes > salarie.dureeHeure &&  salarie.dureeHeure>0) {
+        return makeStringFromNumHours(salarie.dureeHeure)
+      }
+      return res
+    }, form.duree)
     counter++
     const newIntervention = {
       idForm: "N" + counter,
@@ -98,9 +110,7 @@ const PointageTacheForm = (props) => {
         <AiOutlinePlusCircle /> Ajouter Tache <div />
       </ButtonComp>
       {form?.intervention ? (
-        <Card>
           <SalarieHeureCompteur />
-        </Card>
       ) : null}
       {form?.intervention?.length > 0
         ? form.intervention.map((intervention) => (
