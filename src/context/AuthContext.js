@@ -40,7 +40,6 @@ function AuthProviderWrapper(props) {
   }
   const postRequest = (url, data) => {
     const storedToken = localStorage.getItem("authToken")
-    console.log({storedToken, url, data});
     if (storedToken) {
       return axios.post(`${API_URL}${url}`, data ,{
         headers: { authorization: `Bearer ${storedToken}` },

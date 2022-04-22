@@ -19,10 +19,10 @@ import PointageValidation from "./pages/pointage/PointageValidation.page"
 import { useContext } from "react"
 import { AuthContext } from "./context/AuthContext"
 import 'antd/dist/antd.css';
+import PhotoChantier from "./pages/PhotoChantier.page"
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext)
-  console.log({ isLoggedIn })
   return (
     <div className="App">
       <LoadingOverLay />
@@ -47,6 +47,7 @@ function App() {
               <Route index element={<PlanningHome />} />
             </Route>
             <Route path="/photo/*">
+              <Route path="chantier/:chantierID" element={<PhotoChantier />} />
               <Route index element={<PhotoTake />} />
             </Route>
             <Route path="/chantiers/*">

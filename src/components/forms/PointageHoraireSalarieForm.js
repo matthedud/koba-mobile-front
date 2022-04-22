@@ -10,7 +10,7 @@ const PointageHoraireSalarieForm = () => {
       <h1>Horaire Equipe</h1>
       <div>
         {form.salarie.map((salarie) => (
-          <HoraireSalarieCardForm {...salarie} />
+          <HoraireSalarieCardForm key={salarie._id} {...salarie} />
         ))}
       </div>
     </>

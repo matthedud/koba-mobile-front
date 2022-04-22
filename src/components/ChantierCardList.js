@@ -1,5 +1,5 @@
 import React from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { MdPhotoCamera } from 'react-icons/md'
 import { FaMapMarkedAlt } from 'react-icons/fa'
@@ -22,7 +22,7 @@ const ChantierCardList = (props) => {
         </a>
         <div className="element-item" onClick={onCellClicked}>DQE<AiOutlineUnorderedList/></div>
         {/* <div className="element-item" onClick={()=>{}}>Planning<BsFillCalendarDateFill/></div> */}
-        <div className="element-item" onClick={()=>{}}>Photo<MdPhotoCamera/></div>
+        <Link className="element-item" to={`/photo/chantier/${props._id}`} >Photo<MdPhotoCamera/></Link>
       </div>
     </Card>
   )

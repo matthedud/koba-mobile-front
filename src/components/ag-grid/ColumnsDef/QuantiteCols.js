@@ -11,7 +11,7 @@ export const QuantiteCol = (editable, changehandler) => {
     return {
         headerName: "Quantité",
         columnGroupShow: 'closed',
-        field:'quantite',
+        field:'quantiteDqe',
         // valueGetter: params => params?.data?.quantite,
         type: 'NombreType',
         ...editCol(editable, changehandler, 'quantite', (params, value) => value),

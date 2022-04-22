@@ -18,8 +18,6 @@ const PhotoTake = () => {
   const { getRequest, postRequest } = useContext(AuthContext)
   const { setLoading } = useContext(LoadingContext)
   const [chantiers, setChantiers] = useState([])
-  const [fileState, setFileState] = useState([])
-  const [file, setFile] = useState([])
   const [previewSource, setPreviewSource] = useState([])
 
   // function getBase64(file) {
@@ -85,7 +83,8 @@ const PhotoTake = () => {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    setLoading(true)
     if (!form.chantier) {
       message.error("choisir un chantier")
       return
@@ -95,28 +94,24 @@ const PhotoTake = () => {
       message.error("choisir un chantier")
       return
     }
-    uploadImage(previewSource)
-  }
-
-  const uploadImage = (base) => {
     try {
       let poste = []
       if (form.poste) {
         poste = form.poste.map((el) => el._id)
       }
-      postRequest("/upload", {
-        image: base,
+      await postRequest("/upload", {
+        image: previewSource,
         chantier: form.chantier._id,
         poste,
         commentaire: form.commentiare,
       })
+      navigate("/")
+      setForm({})
+      message.info("photo sauvegardée")
     } catch (error) {
       console.log(error)
     }
-
-    // setForm({})
-    // message.info('photo sauvegardée')
-    // navigate("/")
+    setLoading(false)
   }
 
   const handleReturn = () => {

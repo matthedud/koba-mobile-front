@@ -6,7 +6,6 @@ import "./LoadingOverLay.css"
 
 const LoadingOverLay = () => {
   const { loading } = useContext(LoadingContext)
-  console.log(loading)
   return (
     <div className={`loading-overlay ${loading ? "open" : ""}`}>
       <AiOutlineLoading3Quarters className="loading-icon" />
