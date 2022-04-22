@@ -19,31 +19,33 @@ const PhotoTake = () => {
   const { setLoading } = useContext(LoadingContext)
   const [chantiers, setChantiers] = useState([])
   const [previewSource, setPreviewSource] = useState([])
+  const [photoState, setPhotoState] = useState([])
 
-  // function getBase64(file) {
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     reader.onload = () => resolve(reader.result);
-  //     reader.onerror = error => reject(error);
-  //   });
-  // }
 
-  // const handleCancel = () => this.setState({ previewVisible: false });
+  function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
 
-  // const handlePreview = async file => {
-  //   if (!file.url && !file.preview) {
-  //     file.preview = await getBase64(file.originFileObj);
-  //   }
+  const handleCancel = () => setPreviewSource({...previewSource, previewVisible: false });
 
-  // this.setState({
-  //   previewImage: file.url || file.preview,
-  //   previewVisible: true,
-  //   previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
-  // });
-  // };
+  const handlePreview = async file => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
 
-  // const handleChange = ({ fileList }) => this.setState({ fileList });
+    setPreviewSource({
+    previewImage: file.url || file.preview,
+    previewVisible: true,
+    previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
+  });
+  };
+
+  const handleChange = ({ fileList }) => setPhotoState({ fileList });
 
   useEffect(() => {
     const getChantier = async () => {
@@ -60,28 +62,13 @@ const PhotoTake = () => {
     getChantier()
   }, [])
 
-  // const { previewVisible, previewImage, fileList, previewTitle } = this.state;
-  // const uploadButton = (
-  //   <div>
-  //     <PlusOutlined />
-  //     <div style={{ marginTop: 8 }}>Upload</div>
-  //   </div>
-  // );
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
 
-  const handleFile = (event) => {
-    console.log({ event })
-    const file = event.target.files[0]
-    // setFileState(event.target.files)
-    previewFile(file)
-  }
-
-  const previewFile = (file) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onloadend = () => {
-      setPreviewSource(reader.result)
-    }
-  }
 
   const handleSubmit = async () => {
     setLoading(true)
@@ -90,7 +77,7 @@ const PhotoTake = () => {
       return
     }
 
-    if (!previewSource) {
+    if (!photoState.fileList) {
       message.error("choisir un chantier")
       return
     }
@@ -99,8 +86,13 @@ const PhotoTake = () => {
       if (form.poste) {
         poste = form.poste.map((el) => el._id)
       }
+      const image = []
+      for(const photo of photoState.fileList){
+        const b64 = await getBase64(photo.originFileObj)
+        image.push(b64)
+      }
       await postRequest("/upload", {
-        image: previewSource,
+        image,
         chantier: form.chantier._id,
         poste,
         commentaire: form.commentiare,
@@ -146,26 +138,26 @@ const PhotoTake = () => {
             />
           </label>
         ) : null}
-        {/* <>
+        <>
       <Upload
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         listType="picture-card"
-        fileList={form.fileList}
+        fileList={photoState.fileList}
         onPreview={handlePreview}
         onChange={handleChange}
       >
-        {form.fileList?.length >= 8 ? null : uploadButton}
+        {photoState.fileList?.length >= 8 ? null : uploadButton}
       </Upload>
       <Modal
-        visible={form.previewVisible}
-        title={form.previewTitle}
+        visible={previewSource.previewVisible}
+        title={previewSource.previewTitle}
         footer={null}
         onCancel={handleCancel}
       >
-        <img alt="example" style={{ width: '100%' }} src={form.previewImage} />
+        <img alt="example" style={{ width: '100%' }} src={previewSource.previewImage} />
       </Modal>
-    </> */}
-        <input type="file" name="image" onChange={handleFile} />
+    </>
+        {/* <input type="file" name="image" onChange={handleFile} /> */}
         <label htmlFor="salarie">
           Commentaire:
           <TextAreaInput

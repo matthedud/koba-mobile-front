@@ -1,5 +1,7 @@
+import moment from "moment"
 import React from "react"
 import Card from "./Card"
+import { dateViewFormat } from "./Format/DateFormat"
 import './PhotoContainer.css'
 
 const PhotoContainer = (props) => {
@@ -12,7 +14,7 @@ const PhotoContainer = (props) => {
       </picture>
       </a>
       <div className="photo-info">
-          <p>{props.date}</p>
+          <p>{moment(props.date).format(dateViewFormat)}</p>
           <p>{props.commentaire||null}</p>
       </div>
       </div>

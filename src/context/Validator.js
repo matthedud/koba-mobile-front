@@ -44,7 +44,7 @@ export  const validHoraire = horaire =>{
         message.error("entrer l'heure de fin de chantier")
         return  false
       }
-      if (horaire.heureFin < horaire.heureDebut) {
+      if (getHoursFromString(horaire.heureFin) < getHoursFromString(horaire.heureDebut)) {
         message.error("L'heure de Début doit être inférieur à l'heure de fin")
         return false
       }
