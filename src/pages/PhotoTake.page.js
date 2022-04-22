@@ -100,9 +100,11 @@ const PhotoTake = () => {
       navigate("/")
       setForm({})
       message.info("photo sauvegardée")
+      setLoading(false)
     } catch (error) {
       console.log(error)
-    }
+    setLoading(false)
+  }
     setLoading(false)
   }
 

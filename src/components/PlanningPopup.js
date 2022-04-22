@@ -11,7 +11,7 @@ import ReturnButton from "../components/buttons/ReturnButton"
 
 const PlanningPopup = ({visible, toggleVisible, chantierTarget}) => {
   const { setLoading } = useContext(LoadingContext)
-  const { getRequest, user } = useContext(AuthContext)
+  const { getRequest } = useContext(AuthContext)
   const [taches, setTaches] = useState([])
 
   function stopPropagation(e) {
