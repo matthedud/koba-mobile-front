@@ -1,0 +1,22 @@
+.pointage-title{
+    text-align: center;
+    padding-top: 12px;
+}
+
+.fixed-wrap>.pointage-task-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    border: 1px solid rgb(186, 204, 255);
+    box-shadow: 1px 1px 3px rgb(104 147 198);
+    color: rgb(12, 12, 96);
+    margin: 1rem auto;
+    padding: 0.7rem 1rem;
+    gap: 1rem;
+    min-height:0;
+}
+
+.fixed-wrap{
+    min-height: calc(100% - 48px);
+}

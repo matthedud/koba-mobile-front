@@ -10,9 +10,22 @@
     text-align: center;
 }
 
+.dummy{
+    height:50px;
+}
+
+.week-number{
+    margin: 0;
+}
+
+.planning-return{
+    position:fixed;
+    bottom:0;
+}
+
 .week-flex{
     display:flex;
-    align-items: baseline
+    align-items: baseline;
 }
 
 .week-arrow{

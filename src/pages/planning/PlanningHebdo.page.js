@@ -10,6 +10,7 @@ import {dateSaveFormat} from '../../components/Format/DateFormat'
 import PlanningPopup from "../../components/PlanningPopup"
 import ReturnButton from "../../components/buttons/ReturnButton"
 import { BsArrowRightCircle, BsArrowLeftCircle } from "react-icons/bs"
+import {useNavigate} from 'react-router-dom'
 
 const PlanningHebdo = () => {
     // const dureeJour = 8
@@ -23,7 +24,7 @@ const PlanningHebdo = () => {
     const [startWeek, setStartWeek] = useState(startOfWeek(new Date(), {weekStartsOn: 1}))
     const [semaine, setSemaine] = useState([])
     const options = { weekday: 'long', month: 'numeric', day: 'numeric' }
-
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -79,11 +80,15 @@ const PlanningHebdo = () => {
         setStartWeek(add(startWeek, {days: -7}))
     }
 
+    const handleReturn= ()=>{
+      navigate('/')
+    }
+
     return (
         <>
         <PlanningPopup chantierTarget={chantierTarget} visible={visible} toggleVisible={toggleVisible}/>
         <div className="week-flex">
-         <BsArrowLeftCircle onClick={previousWeek} className="week-arrow"/><h2>Semaine {getWeek(startWeek, {weekStartsOn: 1})}</h2><BsArrowRightCircle onClick={nextWeek} className="week-arrow"/>
+         <BsArrowLeftCircle onClick={previousWeek} className="week-arrow"/><h2 className="week-number">Semaine {getWeek(startWeek, {weekStartsOn: 1})}</h2><BsArrowRightCircle onClick={nextWeek} className="week-arrow"/>
         </div>
         <table className="table-planning">
             <tbody>
@@ -101,12 +106,14 @@ const PlanningHebdo = () => {
                     </td>
                 </tr>
                 );
-            })}  
+            })}
             </tbody>
         </table>
-        <ReturnButton/>
+        <div className="dummy"></div>
+        <ReturnButton addClass="planning-return" onClick={handleReturn}/>
         </>
     )
 }
 
 export default PlanningHebdo
+
