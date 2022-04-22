@@ -29,9 +29,6 @@ const PlanningHebdo = () => {
 
     useEffect(() => {
         const getChantiers = async () => {
-        console.log('semaine : ',getWeek(startWeek, {
-            weekStartsOn: 1,
-        }))
         setLoading(true)
         setSemaine([])
         const newSemaine = []
@@ -45,15 +42,15 @@ const PlanningHebdo = () => {
             const chantiersDataReq = await getRequest(`/planning-salarie/${formatedDate}`)
             if (chantiersDataReq?.data){
                 let tachesDataReq
-                for(let i=0;i<chantiersDataReq.data.length;i++){
-                    tachesDataReq = await getRequest(`/tachesPrevu/${chantiersDataReq.data[i].chantierID._id}/${moment(chantiersDataReq.data[i].start).format(dateSaveFormat)}`)
+                const tempData = []
+                for(const planningSalarie of chantiersDataReq.data){
+                    tachesDataReq = await getRequest(`/tachesPrevu/${planningSalarie.chantierID._id}/${moment(planningSalarie.start).format(dateSaveFormat)}`)
                     if (tachesDataReq?.data){
-                        const tempData = [...chantiersDataReq.data]
-                        tempData[i].nbTaches = tachesDataReq.data.length
-                        tempData[i].nbSalaries = tempData[i].salarieID.length
-                        setchantiersData(tempData)
+                        const newPlanning = {...planningSalarie, nbTaches: tachesDataReq.data.length, nbSalaries:planningSalarie.salarieID.length}
+                        tempData.push(newPlanning)
                     }
                 }
+                setchantiersData(tempData)
             }
         } catch (err) {
             message.error("erreur de connexion")

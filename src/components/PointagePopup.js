@@ -5,7 +5,6 @@ import { AuthContext } from "../context/AuthContext"
 import "./PointagePopup.css"
 import ReturnButton from "../components/buttons/ReturnButton"
 
-
 const PointagePopup = ({visible, toggleVisible, pointageTarget}) => {
   const { setLoading } = useContext(LoadingContext)
   const { getRequest } = useContext(AuthContext)
@@ -21,7 +20,6 @@ const PointagePopup = ({visible, toggleVisible, pointageTarget}) => {
     try {
         if(pointageTarget!==undefined){
             const pointageDataReq = await getRequest(`/pointage/${pointageTarget}`)
-            console.log('LE COMBO',pointageDataReq.data)
             setPointageData(pointageDataReq.data)
         }
     } catch (err) {
