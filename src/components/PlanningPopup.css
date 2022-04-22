@@ -1,18 +1,20 @@
 .plan-popup-fade{
     width:100vw;
     height:100vh;
-    background-color:rgba(0, 0, 0, 0.527);
+    background-color:rgba(0, 0, 0, 0.7);
     position:fixed;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
+    top: 0;
 }
 
 .plan-popup-wrap{
-    width: 80%;
-    height: 80%;
+    width: 85%;
+    height: 85%;
     background-color: white;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .plan-popup-wrap p{
@@ -23,10 +25,24 @@
     min-height: calc(100% - 48px);
 }
 
-.plan-popup-wrap .chantier-card-list{
+.plan-popup-wrap .card{
     border: none;
     box-shadow: none; 
     margin: 0;
+    min-width: 0;
+}
+
+.task-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    border: 1px solid rgb(186, 204, 255);
+    box-shadow: 1px 1px 3px rgb(104 147 198);
+    color: rgb(12, 12, 96);
+    margin: 1rem auto;
+    padding: 0.7rem 1rem;
+    gap: 1rem;
 }
 
 .plan-popup-wrap .return-button{
@@ -34,22 +50,3 @@
     width: 96%;
 }
  
-.popup-salaries div{
-    background-color: blue;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-    padding: 0px 5px;
-    width: max-content;
-    margin: 2px auto;
-}
-
-.popup-taches div{
-    background-color: #db2e2e;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-    padding: 0px 5px;
-    margin: 2px auto;
-    width: max-content;
-}

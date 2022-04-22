@@ -42,15 +42,16 @@ const PlanningPopup = ({visible, toggleVisible, chantierTarget}) => {
               <div className="plan-popup-wrap" onClick={stopPropagation}>
                 <div>
                   <ChantierCardList key={chantierTarget} {...chantierTarget[0].chantierID} />
-                  <div className="popup-salaries">
+                  <div className="task-card">
+                    <p><b>Équipe :</b></p>
                     {chantierTarget[0].salarie.map((item)=>{
                       return <div>{item.contact.prenom+' '+item.contact.nom}</div>
                     })}
                   </div>
                   <div className="popup-taches">
                     {taches.map((item)=>{
-                        return <div>
-                          <p>{item.tache.nom+' ( '+item.quantite+' '+item.tache.unite.nom+' ) '}</p>
+                        return <div className="task-card">
+                          <p><b>{item.tache.nom+' ( '+item.quantite+' '+item.tache.unite.nom+' ) '}</b></p>
                           {item.tacheAchat.map((subitem)=>{
                             return <p>{subitem.achat.nom+' ( '+subitem.coefficient*item.quantite+' '+subitem.unite.nom+' ) '}</p>
                           })}
