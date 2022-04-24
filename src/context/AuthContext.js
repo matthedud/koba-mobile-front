@@ -38,6 +38,14 @@ function AuthProviderWrapper(props) {
       })
     }
   }
+  const deleteRequest = (url) => {
+    const storedToken = localStorage.getItem("authToken")
+    if (storedToken) {
+      return axios.delete(`${API_URL}${url}`, {
+        headers: { authorization: `Bearer ${storedToken}` },
+      })
+    }
+  }
   const postRequest = (url, data) => {
     const storedToken = localStorage.getItem("authToken")
     if (storedToken) {
@@ -96,6 +104,7 @@ function AuthProviderWrapper(props) {
     <AuthContext.Provider
       value={{
         getRequest,
+        deleteRequest,
         postRequest,
         API_URL,
         isLoggedIn,

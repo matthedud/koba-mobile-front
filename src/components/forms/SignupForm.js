@@ -1,9 +1,6 @@
 import React, { useState } from "react"
-import { UserOutlined, LockOutlined } from "@ant-design/icons"
-import {Button, Input} from 'antd'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import { SyncOutlined } from "@ant-design/icons"
 
 const API_URL = 'http://localhost:5005/api'
 
