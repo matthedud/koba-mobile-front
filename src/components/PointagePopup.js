@@ -4,8 +4,7 @@ import { LoadingContext } from "../context/LoadingContext"
 import { AuthContext } from "../context/AuthContext"
 import "./PointagePopup.css"
 import ReturnButton from "../components/buttons/ReturnButton"
-import ButtonFoorterGroupe from "./buttons/ButtonFoorterGroupe"
-import ButtonComp from "./buttons/ButtonComp"
+
 
 const PointagePopup = ({ visible, toggleVisible, pointageTarget }) => {
   const { setLoading } = useContext(LoadingContext)
@@ -33,7 +32,6 @@ const PointagePopup = ({ visible, toggleVisible, pointageTarget }) => {
     getPointageDetails()
   }, [pointageTarget])
 
-  const editHandler = () => {}
 
   return (
     <>
@@ -72,7 +70,6 @@ const PointagePopup = ({ visible, toggleVisible, pointageTarget }) => {
               </div>
             </div>
               <ReturnButton onClick={toggleVisible} />
-              <ButtonComp onClick={editHandler}>Editer</ButtonComp>
           </div>
         </div>
       )}
